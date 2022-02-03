@@ -1,25 +1,43 @@
 local use = require("packer").use
 require("packer").startup({
 	function()
-		use("wbthomason/packer.nvim")
-		use("nvim-treesitter/nvim-treesitter")
-		use("p00f/nvim-ts-rainbow")
-		use("neovim/nvim-lspconfig")
+		use("nvim-lua/plenary.nvim")
+		use({ "wbthomason/packer.nvim" })
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			event = "BufRead",
+			config = function()
+				require("configs.treesitter").setup()
+			end,
+		})
+		use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
+		use({ "neovim/nvim-lspconfig" })
+
+		use({
+			"williamboman/nvim-lsp-installer",
+			config = require("lsp"),
+		})
 
 		-- Completion
-		use("williamboman/nvim-lsp-installer")
-		use("hrsh7th/cmp-nvim-lsp")
-		use("hrsh7th/cmp-buffer")
-		use("hrsh7th/cmp-path")
-		use("hrsh7th/cmp-cmdline")
-		use("hrsh7th/nvim-cmp")
-
-		use("hrsh7th/cmp-vsnip")
-		use("hrsh7th/vim-vsnip")
-		use("onsails/lspkind-nvim")
+		use({ "onsails/lspkind-nvim", event = "BufRead" })
+		use({
+			"hrsh7th/nvim-cmp",
+			config = function()
+				require("configs.cmp")
+			end,
+			requires = {
+				{ "hrsh7th/cmp-nvim-lsp" },
+				{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+				{ "hrsh7th/cmp-path", after = "nvim-cmp" },
+				{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+				{ "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
+				{ "hrsh7th/vim-vsnip", after = "nvim-cmp" },
+			},
+		})
 
 		use({
 			"folke/trouble.nvim",
+			cmd = { "Trouble", "TroubleToggle" },
 			config = function()
 				require("trouble").setup()
 			end,
@@ -33,11 +51,15 @@ require("packer").startup({
 				require("bufferline").setup()
 			end,
 		})
-		use("nvim-lua/plenary.nvim")
 		use("windwp/nvim-autopairs")
-		-- use("SmiteshP/nvim-gps")
-		use("nvim-telescope/telescope.nvim")
-		use("arkav/lualine-lsp-progress")
+		use({ "nvim-telescope/telescope.nvim", cmd = "Telescope" })
+		use({
+			"j-hui/fidget.nvim",
+			event = "BufRead",
+			config = function()
+				require("fidget").setup()
+			end,
+		})
 		use("kyazdani42/nvim-tree.lua")
 		use({
 			"blackCauldron7/surround.nvim",
@@ -47,6 +69,7 @@ require("packer").startup({
 		})
 		use({
 			"norcalli/nvim-colorizer.lua",
+			event = "BufRead",
 			config = function()
 				require("colorizer").setup()
 			end,
@@ -76,6 +99,8 @@ require("packer").startup({
 		-- use("folke/tokyonight.nvim")
 		use({
 			"abecodes/tabout.nvim",
+			event = "InsertEnter",
+			after = "nvim-treesitter",
 			config = function()
 				require("tabout").setup()
 			end,

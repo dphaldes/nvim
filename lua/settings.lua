@@ -11,7 +11,6 @@ local exec = vim.api.nvim_exec -- execute Vimscript
 local fn = vim.fn -- call Vim functions
 local g = vim.g -- global variables
 local opt = vim.opt -- global/buffer/windows-scoped options
-
 -----------------------------------------------------------
 -- General
 -----------------------------------------------------------
@@ -42,11 +41,11 @@ cmd([[au BufWritePre * :%s/\s\+$//e]])
 
 -- highlight on yank
 exec(
-	[[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}
-  augroup end
+	[[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}
+  augroup end
 ]],
 	false
 )
@@ -83,8 +82,8 @@ cmd([[au BufEnter * set fo-=c fo-=r fo-=o]])
 cmd([[autocmd FileType text,markdown,xml,html,xhtml,javascript setlocal cc=0]])
 
 -- 2 spaces for selected filetypes
-cmd([[
-  autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
+cmd([[
+  autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
 ]])
 
 -- IndentLine
@@ -97,7 +96,7 @@ cmd([[autocmd FileType markdown let g:indentLine_enabled=0]])
 -----------------------------------------------------------
 -- Autocompletion
 -----------------------------------------------------------
-opt.completeopt = "menuone,noinsert" -- completion options
+opt.completeopt = "menu,menuone,noinsert" -- completion options
 --opt.shortmess = 'c' 	-- don't show completion messages
 
 -----------------------------------------------------------

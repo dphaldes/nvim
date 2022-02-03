@@ -1,25 +1,3 @@
--- local tn_colors = require("tokyonight.colors").setup({})
-local rp_colors = require("rose-pine.palette")
--- TS Highlight
-require("nvim-treesitter.configs").setup({
-	highlight = {
-		enable = true,
-	},
-	rainbow = {
-		enable = true,
-		extended_mode = true,
-		max_file_lines = nil,
-		colors = {
-			rp_colors.love,
-			rp_colors.gold,
-			rp_colors.rose,
-			rp_colors.pine,
-			rp_colors.foam,
-			rp_colors.iris,
-		},
-	},
-})
---Diagnostics Setup
 local signs = {
 	{ name = "DiagnosticSignError", text = " " },
 	{ name = "DiagnosticSignWarn", text = " " },
@@ -32,7 +10,7 @@ end
 
 vim.diagnostic.config({
 	-- disable virtual text
-	virtual_text = false,
+	virtual_text = true,
 	-- show signs
 	signs = {
 		active = signs,
@@ -73,7 +51,6 @@ null_ls.setup({
 })
 
 -- Lualine
--- local gps = require("nvim-gps")
 require("lualine").setup({
 	options = {
 		theme = "rose-pine",
@@ -83,7 +60,6 @@ require("lualine").setup({
 	sections = {
 		lualine_c = {
 			-- { gps.get_location, condition = gps.is_available },
-			"lsp_progress",
 		},
 	},
 	extensions = { "nvim-tree" },
@@ -147,16 +123,16 @@ require("nvim-tree").setup({
 	},
 })
 
-require("project_nvim").setup({
-	patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pubspec.yaml", "init.lua" },
-})
+-- require("project_nvim").setup({
+-- 	patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pubspec.yaml", "init.lua" },
+-- })
 
-local telescope = require("telescope")
-telescope.setup({
-	pickers = {
-		lsp_code_actions = {
-			theme = "cursor",
-		},
-	},
-})
-telescope.load_extension("projects")
+-- local telescope = require("telescope")
+-- telescope.setup({
+-- 	pickers = {
+-- 		lsp_code_actions = {
+-- 			theme = "cursor",
+-- 		},
+-- 	},
+-- })
+-- telescope.load_extension("projects")

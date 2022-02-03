@@ -1,3 +1,3 @@
-GuiFont! JetBrains Mono
-GuiTabline 0
-GuiPopupmenu 0
+" GuiFont! JetBrains Mono
+" GuiTabline 0
+" GuiPopupmenu 0
