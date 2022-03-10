@@ -34,3 +34,6 @@ keymap("v", "p", '"_dP', opts)
 
 -- Telescope
 keymap("n", "<leader>ca", "<cmd>Telescope lsp_code_actions<CR>", opts)
+
+-- NerdTree
+keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", opts)

@@ -1,6 +1,51 @@
-local cmp_lsp = require("cmp_nvim_lsp")
-local nvim_lsp_installer = require("nvim-lsp-installer")
+-- Setup nvim-cmp.
+local cmp = require("cmp")
+local lspkind = require("lspkind")
 
+cmp.setup({
+	formatting = {
+		format = lspkind.cmp_format({
+			with_text = true,
+		}),
+	},
+	snippet = {
+		-- REQUIRED - you must specify a snippet engine
+		expand = function(args)
+			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+		end,
+	},
+	mapping = {
+		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+		["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+		["<C-e>"] = cmp.mapping({
+			i = cmp.mapping.abort(),
+			c = cmp.mapping.close(),
+		}),
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+	},
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "vsnip" }, -- For vsnip users.
+	}, {
+		{ name = "buffer" },
+	}),
+})
+
+cmp.setup.cmdline("/", {
+	sources = {
+		{ name = "buffer" },
+	},
+})
+
+cmp.setup.cmdline(":", {
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{ name = "cmdline" },
+	}),
+})
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
 	local keymap = vim.api.nvim_buf_set_keymap
@@ -20,9 +65,22 @@ local function lsp_keymaps(bufnr)
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
 
-local capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-----------------------
+--- Setup lspconfig ---
+-----------------------
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-nvim_lsp_installer.on_server_ready(function(server)
+--- Custom server options
+local server_opts = {
+	["sumneko_lua"] = function(opts)
+		opts.settings = {
+			Lua = { diagnostics = { globals = { "vim" } } },
+		}
+	end,
+}
+
+local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.on_server_ready(function(server)
 	local opts = {
 		-- on_attach = function(client)
 		-- 	if client.resolved_capabilities.document_formatting then
@@ -35,6 +93,25 @@ nvim_lsp_installer.on_server_ready(function(server)
 		end,
 	}
 
+	if server_opts[server.name] then
+		server_opts[server.name](opts)
+	end
+
 	server:setup(opts)
 	vim.cmd([[ do User LspAttachBuffers ]])
 end)
+
+-- Formatter
+local null_ls = require("null-ls")
+null_ls.setup({
+	sources = {
+		null_ls.builtins.formatting.stylua,
+		-- builtins.formatting.rustfmt
+		-- null_ls.builtins.formatting.dart_format,
+	},
+	on_attach = function(client)
+		if client.resolved_capabilities.document_formatting then
+			vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+		end
+	end,
+})

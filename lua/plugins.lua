@@ -1,7 +1,22 @@
-local use = require("packer").use
-require("packer").startup({
-	function()
+local fn = vim.fn
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+	packer_bootstrap = fn.system({
+		"git",
+		"clone",
+		"--depth",
+		"1",
+		"https://github.com/wbthomason/packer.nvim",
+		install_path,
+	})
+end
+
+return require("packer").startup({
+	function(use)
+		-- Must-installs and dependencies
+
 		use("nvim-lua/plenary.nvim")
+		use("kyazdani42/nvim-web-devicons")
 		use({ "wbthomason/packer.nvim" })
 		use({
 			"nvim-treesitter/nvim-treesitter",
@@ -11,30 +26,36 @@ require("packer").startup({
 			end,
 		})
 		use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
-		use({ "neovim/nvim-lspconfig" })
-
-		use({
-			"williamboman/nvim-lsp-installer",
-			config = require("lsp"),
-		})
+		use("neovim/nvim-lspconfig")
+		use("jose-elias-alvarez/null-ls.nvim")
 
 		-- Completion
-		use({ "onsails/lspkind-nvim", event = "BufRead" })
+		use("williamboman/nvim-lsp-installer")
+		use("hrsh7th/cmp-nvim-lsp")
+		use("hrsh7th/cmp-buffer")
+		use("hrsh7th/cmp-path")
+		use("hrsh7th/cmp-cmdline")
+		use("hrsh7th/nvim-cmp")
+
+		use("hrsh7th/cmp-vsnip")
+		use("hrsh7th/vim-vsnip")
+		use("onsails/lspkind-nvim")
+
+		-- Colorscheme
 		use({
-			"hrsh7th/nvim-cmp",
+			"rose-pine/neovim",
+			as = "rose-pine",
+			tag = "v1.*",
 			config = function()
-				require("configs.cmp")
+				require("rose-pine").setup({
+					-- dark_variant = "moon",
+					disable_italics = true,
+				})
+				vim.cmd("colorscheme rose-pine")
 			end,
-			requires = {
-				{ "hrsh7th/cmp-nvim-lsp" },
-				{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-				{ "hrsh7th/cmp-path", after = "nvim-cmp" },
-				{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-				{ "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
-				{ "hrsh7th/vim-vsnip", after = "nvim-cmp" },
-			},
 		})
 
+		-- UI stuff
 		use({
 			"folke/trouble.nvim",
 			cmd = { "Trouble", "TroubleToggle" },
@@ -42,16 +63,41 @@ require("packer").startup({
 				require("trouble").setup()
 			end,
 		})
-		use("jose-elias-alvarez/null-ls.nvim")
-		use("kyazdani42/nvim-web-devicons")
-		use("nvim-lualine/lualine.nvim")
+		use({
+			"nvim-lualine/lualine.nvim",
+			enter = "VimEnter",
+			after = "rose-pine",
+			config = function()
+				require("lualine").setup({
+					options = {
+						theme = "rose-pine",
+						section_separators = { "", "" },
+						component_separators = { "", "" },
+					},
+					extensions = { "nvim-tree" },
+				})
+			end,
+		})
 		use({
 			"akinsho/bufferline.nvim",
+			event = "VimEnter",
 			config = function()
 				require("bufferline").setup()
 			end,
 		})
-		use("windwp/nvim-autopairs")
+		use({
+			"kyazdani42/nvim-tree.lua",
+			cmd = "NvimTreeToggle",
+			config = function()
+				require("nvim-tree").setup({
+					update_cwd = true,
+					update_focused_file = {
+						enable = true,
+						update_cwd = true,
+					},
+				})
+			end,
+		})
 		use({ "nvim-telescope/telescope.nvim", cmd = "Telescope" })
 		use({
 			"j-hui/fidget.nvim",
@@ -60,9 +106,20 @@ require("packer").startup({
 				require("fidget").setup()
 			end,
 		})
-		use("kyazdani42/nvim-tree.lua")
 		use({
-			"blackCauldron7/surround.nvim",
+			"goolord/alpha-nvim",
+			requires = { "kyazdani42/nvim-web-devicons" },
+			config = function()
+				-- require("alpha").setup(require("alpha.themes.theta").config)
+				require("startup")
+			end,
+		})
+
+		-- Editing support
+		use("windwp/nvim-autopairs")
+		-- FIXME plugin dead
+		use({
+			"ur4ltz/surround.nvim",
 			config = function()
 				require("surround").setup({ mappings_style = "surround" })
 			end,
@@ -74,28 +131,14 @@ require("packer").startup({
 				require("colorizer").setup()
 			end,
 		})
-		-- use({
-		-- 	"sunjon/Shade.nvim",
-		-- 	config = function()
-		-- 		require("shade").setup()
-		-- 	end,
-		-- })
 		use({
 			"numToStr/Comment.nvim",
 			config = function()
 				require("Comment").setup()
 			end,
 		})
-		use({
-			"goolord/alpha-nvim",
-			requires = { "kyazdani42/nvim-web-devicons" },
-			config = function()
-				require("alpha").setup(require("alpha.themes.startify").opts)
-			end,
-		})
 		-- use("lukas-reineke/indent-blankline.nvim")
 		use("ahmedkhalf/project.nvim")
-		use({ "rose-pine/neovim", as = "rose-pine" })
 		-- use("folke/tokyonight.nvim")
 		use({
 			"abecodes/tabout.nvim",
@@ -105,12 +148,9 @@ require("packer").startup({
 				require("tabout").setup()
 			end,
 		})
-		-- use({
-		-- 	"HallerPatrick/py_lsp.nvim",
-		-- 	config = function()
-		-- 		require("py_lsp").setup()
-		-- 	end,
-		-- })
+		if packer_bootstrap then
+			require("packer").sync()
+		end
 	end,
 	config = {
 		display = {

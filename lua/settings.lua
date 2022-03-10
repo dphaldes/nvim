@@ -64,8 +64,7 @@ opt.synmaxcol = 240 -- max column for syntax highlight
 opt.termguicolors = true -- enable 24-bit RGB colors
 -- vim.g.tokyonight_italic_comments = false
 -- vim.g.tokyonight_italic_keywords = false
-vim.g.rose_pine_disable_italics = true
-cmd([[colorscheme rose-pine]])
+-- cmd([[colorscheme rose-pine]])
 
 -----------------------------------------------------------
 -- Tabs, indent
