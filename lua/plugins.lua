@@ -28,17 +28,22 @@ return require("packer").startup({
 		use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
 		use("neovim/nvim-lspconfig")
 		use("jose-elias-alvarez/null-ls.nvim")
+		use("lewis6991/impatient.nvim")
+		use("nathom/filetype.nvim")
 
 		-- Completion
 		use("williamboman/nvim-lsp-installer")
 		use("hrsh7th/cmp-nvim-lsp")
+		use("hrsh7th/cmp-nvim-lua")
 		use("hrsh7th/cmp-buffer")
 		use("hrsh7th/cmp-path")
 		use("hrsh7th/cmp-cmdline")
 		use("hrsh7th/nvim-cmp")
 
-		use("hrsh7th/cmp-vsnip")
-		use("hrsh7th/vim-vsnip")
+		use("L3MON4D3/LuaSnip")
+		use("saadparwaiz1/cmp_luasnip")
+		-- use("hrsh7th/cmp-vsnip")
+		-- use("hrsh7th/vim-vsnip")
 		use("onsails/lspkind-nvim")
 
 		-- Colorscheme
