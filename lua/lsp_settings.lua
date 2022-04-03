@@ -10,7 +10,7 @@ end
 
 vim.diagnostic.config({
 	-- disable virtual text
-	virtual_text = true,
+	virtual_text = false,
 	-- show signs
 	signs = {
 		active = signs,
@@ -34,3 +34,6 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = "rounded",
 })
+
+vim.o.updatetime = 250
+vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]])

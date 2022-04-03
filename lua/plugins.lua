@@ -14,7 +14,6 @@ end
 return require("packer").startup({
 	function(use)
 		-- Must-installs and dependencies
-
 		use("nvim-lua/plenary.nvim")
 		use("kyazdani42/nvim-web-devicons")
 		use({ "wbthomason/packer.nvim" })
@@ -81,14 +80,12 @@ return require("packer").startup({
 					},
 					extensions = { "nvim-tree" },
 				})
+				vim.api.nvim_set_option("laststatus", 3)
 			end,
 		})
 		use({
-			"akinsho/bufferline.nvim",
-			event = "VimEnter",
-			config = function()
-				require("bufferline").setup()
-			end,
+			"romgrk/barbar.nvim",
+			requires = { "kyazdani42/nvim-web-devicons" },
 		})
 		use({
 			"kyazdani42/nvim-tree.lua",
@@ -119,6 +116,15 @@ return require("packer").startup({
 				require("startup")
 			end,
 		})
+		use({
+			"lewis6991/gitsigns.nvim", -- Add keybinds later
+			event = "BufRead",
+			config = function()
+				require("gitsigns").setup()
+			end,
+		})
+		use({ "stevearc/dressing.nvim" })
+		use({ "rcarriga/nvim-notify" })
 
 		-- Editing support
 		use("windwp/nvim-autopairs")

@@ -115,5 +115,6 @@ opt.completeopt = "menu,menuone,noinsert" -- completion options
 
 g.indentLine_char = "│"
 
-local group = vim.api.nvim_create_augroup("AlphaClean",  {clear = true})
+local group = vim.api.nvim_create_augroup("AlphaClean", { clear = true })
 vim.api.nvim_create_autocmd("FileType Alpha", { command = "hi NonText guifg=bg", group = group })
+vim.notify = require("notify")
