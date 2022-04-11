@@ -19,12 +19,17 @@ return require("packer").startup({
 		use({ "wbthomason/packer.nvim" })
 		use({
 			"nvim-treesitter/nvim-treesitter",
-			event = "BufRead",
 			config = function()
 				require("configs.treesitter").setup()
 			end,
 		})
-		use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
+		use("p00f/nvim-ts-rainbow")
+		use({
+			"m-demare/hlargs.nvim",
+			config = function()
+				require("hlargs").setup()
+			end,
+		})
 		use("neovim/nvim-lspconfig")
 		use("jose-elias-alvarez/null-ls.nvim")
 		use("lewis6991/impatient.nvim")
@@ -41,8 +46,6 @@ return require("packer").startup({
 
 		use("L3MON4D3/LuaSnip")
 		use("saadparwaiz1/cmp_luasnip")
-		-- use("hrsh7th/cmp-vsnip")
-		-- use("hrsh7th/vim-vsnip")
 		use("onsails/lspkind-nvim")
 
 		-- Colorscheme
@@ -59,7 +62,7 @@ return require("packer").startup({
 			end,
 		})
 
-		-- UI stuff
+		-- UI
 		use({
 			"folke/trouble.nvim",
 			cmd = { "Trouble", "TroubleToggle" },
@@ -125,16 +128,17 @@ return require("packer").startup({
 		})
 		use({ "stevearc/dressing.nvim" })
 		use({ "rcarriga/nvim-notify" })
+		use("folke/which-key.nvim")
+		use({
+			"mrjones2014/legendary.nvim",
+			config = function()
+				require("legendary")
+			end,
+		})
 
 		-- Editing support
 		use("windwp/nvim-autopairs")
-		-- FIXME plugin dead
-		use({
-			"ur4ltz/surround.nvim",
-			config = function()
-				require("surround").setup({ mappings_style = "surround" })
-			end,
-		})
+		use("tpope/vim-surround")
 		use({
 			"norcalli/nvim-colorizer.lua",
 			event = "BufRead",
@@ -148,9 +152,7 @@ return require("packer").startup({
 				require("Comment").setup()
 			end,
 		})
-		-- use("lukas-reineke/indent-blankline.nvim")
 		use("ahmedkhalf/project.nvim")
-		-- use("folke/tokyonight.nvim")
 		use({
 			"abecodes/tabout.nvim",
 			event = "InsertEnter",
