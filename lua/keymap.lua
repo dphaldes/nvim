@@ -37,3 +37,37 @@ keymap("n", "<leader>ca", "<cmd>Telescope lsp_code_actions<CR>", opts)
 
 -- NerdTree
 keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", opts)
+
+local options = {
+	prefix = "<leader>",
+}
+local mappings = {
+	p = {
+		name = "packer",
+		s = { "<cmd>PackerSync<CR>", "packer sync" },
+		i = { "<cmd>PackerInstall<CR>", "packer install" },
+		u = { "<cmd>PackerUpdate<CR>", "packer update" },
+		x = { "<cmd>PackerClean<CR>", "packer clean" },
+	},
+	t = {
+		name = "telescope",
+		f = { "<cmd>Telescope find_files<CR>", "files" },
+		g = { "<cmd>Telescope live_grep<CR>", "live grep" },
+		c = { "<cmd>Telescope commands<CR>", "commands" },
+	},
+	f = {
+		name = "file",
+		w = { "<cmd>w<CR>", "write" },
+		q = { "<cmd>q<CR>", "close" },
+		x = { "<cmd>x<CR>", "write-close" },
+		c = { "<cmd>qa<CR>", "exit" },
+		f = { "<cmd>Telescope find_files<CR>", "find" },
+	},
+}
+local wk = require("which-key")
+wk.setup({
+	window = {
+		border = "single",
+	},
+})
+wk.register(mappings, options)

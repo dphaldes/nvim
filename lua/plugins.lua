@@ -129,12 +129,7 @@ return require("packer").startup({
 		use({ "stevearc/dressing.nvim" })
 		use({ "rcarriga/nvim-notify" })
 		use("folke/which-key.nvim")
-		use({
-			"mrjones2014/legendary.nvim",
-			config = function()
-				require("legendary")
-			end,
-		})
+		-- use("mrjones2014/legendary.nvim")
 
 		-- Editing support
 		use("windwp/nvim-autopairs")

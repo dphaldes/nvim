@@ -34,17 +34,6 @@ MUtils.BS = function()
 end
 remap("i", "<bs>", "v:lua.MUtils.BS()", { expr = true, noremap = true })
 
--- Indent Lines
--- vim.opt.list = true
--- vim.opt.listchars:append("space:⋅")
--- -- vim.opt.listchars:append("eol:↴")
--- vim.g.indent_blankline_filetype_exclude = { "trouble", "alpha", "help" }
---
--- require("indent_blankline").setup({
--- 	-- show_end_of_line = true,
--- 	space_char_blankline = " ",
--- })
-
 -- File Tree
 vim.g.nvim_tree_respect_buf_cwd = 1
 
@@ -52,12 +41,8 @@ require("project_nvim").setup({
 	patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pubspec.yaml", "init.lua" },
 })
 
--- local telescope = require("telescope")
--- telescope.setup({
--- 	pickers = {
--- 		lsp_code_actions = {
--- 			theme = "cursor",
--- 		},
--- 	},
--- })
+local telescope = require("telescope")
+telescope.setup({
+	defaults = require("telescope.themes").get_dropdown(),
+})
 -- telescope.load_extension("projects")

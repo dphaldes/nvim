@@ -16,7 +16,7 @@ cmp.setup({
 			luasnip.lsp_expand(args.body)
 		end,
 	},
-	mapping = {
+	mapping = cmp.mapping.preset.insert({
 		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -26,29 +26,47 @@ cmp.setup({
 			c = cmp.mapping.close(),
 		}),
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if luasnip.expandable() then
-				luasnip.expand()
-			elseif cmp.visible() then
+		["<Tab>"] = function(fallback)
+			if cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.jumpable(1) then
-				luasnip.jump(1)
-			elseif vim.api.nvim_get_mode().mode == "i" then
-				tabout.tabout()
+			elseif luasnip.expand_or_jumpable() then
+				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
+		end,
+		["<S-Tab>"] = function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
 			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
+				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
-	},
+		end,
+		-- ["<Tab>"] = cmp.mapping(function(fallback)
+		-- 	if luasnip.expandable() then
+		-- 		luasnip.expand()
+		-- 	elseif cmp.visible() then
+		-- 		cmp.select_next_item()
+		-- 	elseif luasnip.jumpable(1) then
+		-- 		luasnip.jump(1)
+		-- 	elseif vim.api.nvim_get_mode().mode == "i" then
+		-- 		tabout.tabout()
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { "i", "s" }),
+		-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+		-- 	if cmp.visible() then
+		-- 		cmp.select_prev_item()
+		-- 	elseif luasnip.jumpable(-1) then
+		-- 		luasnip.jump(-1)
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { "i", "s" }),
+	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lua" },
