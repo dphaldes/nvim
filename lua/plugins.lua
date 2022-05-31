@@ -87,10 +87,6 @@ return require("packer").startup({
 			end,
 		})
 		use({
-			"romgrk/barbar.nvim",
-			requires = { "kyazdani42/nvim-web-devicons" },
-		})
-		use({
 			"kyazdani42/nvim-tree.lua",
 			cmd = "NvimTreeToggle",
 			config = function()
@@ -108,17 +104,21 @@ return require("packer").startup({
 			"j-hui/fidget.nvim",
 			event = "BufRead",
 			config = function()
-				require("fidget").setup()
+				require("fidget").setup({
+					text = {
+						spinner = "arc",
+					},
+				})
 			end,
 		})
-		use({
-			"goolord/alpha-nvim",
-			requires = { "kyazdani42/nvim-web-devicons" },
-			config = function()
-				-- require("alpha").setup(require("alpha.themes.theta").config)
-				require("startup")
-			end,
-		})
+		-- use({
+		-- 	"goolord/alpha-nvim",
+		-- 	requires = { "kyazdani42/nvim-web-devicons" },
+		-- 	config = function()
+		-- 		-- require("alpha").setup(require("alpha.themes.theta").config)
+		-- 		require("startup")
+		-- 	end,
+		-- })
 		use({
 			"lewis6991/gitsigns.nvim", -- Add keybinds later
 			event = "BufRead",
@@ -160,11 +160,11 @@ return require("packer").startup({
 			require("packer").sync()
 		end
 	end,
-	config = {
-		display = {
-			open_fn = function()
-				return require("packer.util").float({ border = "rounded" })
-			end,
-		},
-	},
+	-- config = {
+	-- 	display = {
+	-- 		open_fn = function()
+	-- 			return require("packer.util").float({ border = "single" })
+	-- 		end,
+	-- 	},
+	-- },
 })

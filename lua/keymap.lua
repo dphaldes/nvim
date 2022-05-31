@@ -15,8 +15,6 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
--- keymap("n", "<leader>e", ":Lex 30<cr>", opts)
-
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
@@ -30,7 +28,7 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 -- Move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("v", "p", '"_dP', opts)
+-- keymap("v", "p", '"_dP', opts)
 
 -- Telescope
 keymap("n", "<leader>ca", "<cmd>Telescope lsp_code_actions<CR>", opts)
@@ -48,21 +46,33 @@ local mappings = {
 		i = { "<cmd>PackerInstall<CR>", "packer install" },
 		u = { "<cmd>PackerUpdate<CR>", "packer update" },
 		x = { "<cmd>PackerClean<CR>", "packer clean" },
+		c = { "<cmd>e $MYVIMRC<CR>", "edit config" },
 	},
 	t = {
 		name = "telescope",
 		f = { "<cmd>Telescope find_files<CR>", "files" },
 		g = { "<cmd>Telescope live_grep<CR>", "live grep" },
 		c = { "<cmd>Telescope commands<CR>", "commands" },
+		b = { "<cmd>Telescope buffers<CR> ", "buffers" },
 	},
 	f = {
 		name = "file",
-		w = { "<cmd>w<CR>", "write" },
+		s = { "<cmd>w<CR>", "write" },
 		q = { "<cmd>q<CR>", "close" },
 		x = { "<cmd>x<CR>", "write-close" },
 		c = { "<cmd>qa<CR>", "exit" },
 		f = { "<cmd>Telescope find_files<CR>", "find" },
 	},
+	b = {
+		name = "buffer",
+		v = { "<cmd>vs<CR>", "vertical" },
+		s = { "<cmd>sp<CR>", "horizontal" },
+		n = { "<cmd>BufferNext<CR>", "next" },
+		p = { "<cmd>BufferPrevious<CR>", "previous" },
+		k = { "<cmd>q<CR>", "close" },
+		b = { "<cmd>Telescope buffers<CR> ", "buffers" },
+	},
+	-- Trouble
 }
 local wk = require("which-key")
 wk.setup({

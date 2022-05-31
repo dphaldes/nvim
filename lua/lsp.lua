@@ -2,7 +2,7 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 local luasnip = require("luasnip")
-local tabout = require("tabout")
+-- local tabout = require("tabout")
 
 cmp.setup({
 	formatting = {
@@ -20,25 +20,24 @@ cmp.setup({
 		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-		["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
 		["<C-e>"] = cmp.mapping({
 			i = cmp.mapping.abort(),
 			c = cmp.mapping.close(),
 		}),
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 		["<Tab>"] = function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
+			-- if cmp.visible() then
+			-- 	cmp.select_next_item()
+			if luasnip.expand_or_jumpable() then
 				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
 			else
 				fallback()
 			end
 		end,
 		["<S-Tab>"] = function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
+			-- if cmp.visible() then
+			-- 	cmp.select_prev_item()
+			if luasnip.jumpable(-1) then
 				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
 			else
 				fallback()
@@ -78,12 +77,14 @@ cmp.setup({
 })
 
 cmp.setup.cmdline("/", {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
 		{ name = "buffer" },
 	},
 })
 
 cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },
 	}, {
@@ -123,34 +124,26 @@ local server_opts = {
 	end,
 }
 
-local lsp_installer = require("nvim-lsp-installer")
-lsp_installer.on_server_ready(function(server)
-	local opts = {
-		-- on_attach = function(client)
-		-- 	if client.resolved_capabilities.document_formatting then
-		-- 		vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-		-- 	end
-		-- end,
-		capabilities = capabilities,
-		on_attach = function(_, bufnr)
-			lsp_keymaps(bufnr)
-		end,
-	}
-
-	if server_opts[server.name] then
-		server_opts[server.name](opts)
-	end
-
-	server:setup(opts)
-	vim.cmd([[ do User LspAttachBuffers ]])
-end)
+require("nvim-lsp-installer").setup()
+local lspconfig = require('lspconfig')
+local servers = { "pyright", "rust_analyzer", "tsserver", "sumneko_lua", "gdscript" }
+for _, lsp in pairs(servers) do
+  local opts = {
+			capabilities = capabilities,
+			on_attach = function(_, bufnr)
+				lsp_keymaps(bufnr)
+			end,
+  }
+  if server_opts[lsp] then server_opts[lsp](opts) end
+	lspconfig[lsp].setup(opts)
+end
 
 -- Formatter
 local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.stylua,
-		-- null_ls.builtins.formatting.autopep8,
+		null_ls.builtins.formatting.autopep8,
 		-- builtins.formatting.rustfmt
 		-- null_ls.builtins.formatting.dart_format,
 	},
@@ -160,3 +153,15 @@ null_ls.setup({
 		end
 	end,
 })
+
+vim.lsp.handlers["window/showMessage"] = function(_, result, ctx)
+	local client = vim.lsp.get_client_by_id(ctx.client_id)
+	local lvl = ({ "ERROR", "WARN", "INFO", "DEBUG" })[result.type]
+	vim.notify({ result.message }, lvl, {
+		title = "LSP | " .. client.name,
+		timeout = 10000,
+		keep = function()
+			return lvl == "ERROR" or lvl == "WARN"
+		end,
+	})
+end

@@ -41,8 +41,8 @@ require("project_nvim").setup({
 	patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pubspec.yaml", "init.lua" },
 })
 
-local telescope = require("telescope")
-telescope.setup({
-	defaults = require("telescope.themes").get_dropdown(),
-})
+-- local telescope = require("telescope")
+-- telescope.setup({
+-- 	defaults = require("telescope.themes").get_dropdown(),
+-- })
 -- telescope.load_extension("projects")
