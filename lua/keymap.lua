@@ -46,7 +46,8 @@ local mappings = {
 		i = { "<cmd>PackerInstall<CR>", "packer install" },
 		u = { "<cmd>PackerUpdate<CR>", "packer update" },
 		x = { "<cmd>PackerClean<CR>", "packer clean" },
-		c = { "<cmd>e $MYVIMRC<CR>", "edit config" },
+		c = { "<cmd>PackerCompile<CR>", "packer compile" },
+		e = { "<cmd>e $MYVIMRC<CR>", "edit config" },
 	},
 	t = {
 		name = "telescope",

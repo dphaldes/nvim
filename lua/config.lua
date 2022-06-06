@@ -34,9 +34,6 @@ MUtils.BS = function()
 end
 remap("i", "<bs>", "v:lua.MUtils.BS()", { expr = true, noremap = true })
 
--- File Tree
-vim.g.nvim_tree_respect_buf_cwd = 1
-
 require("project_nvim").setup({
 	patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pubspec.yaml", "init.lua" },
 })

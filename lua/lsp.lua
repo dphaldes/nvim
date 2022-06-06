@@ -125,16 +125,26 @@ local server_opts = {
 }
 
 require("nvim-lsp-installer").setup()
-local lspconfig = require('lspconfig')
-local servers = { "pyright", "rust_analyzer", "tsserver", "sumneko_lua", "gdscript" }
+local lspconfig = require("lspconfig")
+local servers = {
+	"pyright",
+	"rust_analyzer",
+	"tsserver",
+	"sumneko_lua",
+	"gdscript",
+	"clangd",
+	"kotlin_language_server",
+}
 for _, lsp in pairs(servers) do
-  local opts = {
-			capabilities = capabilities,
-			on_attach = function(_, bufnr)
-				lsp_keymaps(bufnr)
-			end,
-  }
-  if server_opts[lsp] then server_opts[lsp](opts) end
+	local opts = {
+		capabilities = capabilities,
+		on_attach = function(_, bufnr)
+			lsp_keymaps(bufnr)
+		end,
+	}
+	if server_opts[lsp] then
+		server_opts[lsp](opts)
+	end
 	lspconfig[lsp].setup(opts)
 end
 

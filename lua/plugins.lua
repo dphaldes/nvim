@@ -57,11 +57,44 @@ return require("packer").startup({
 				require("rose-pine").setup({
 					-- dark_variant = "moon",
 					disable_italics = true,
+					highlight_groups = {
+						DiagnosticUnderlineError = { style = "underline" },
+						DiagnosticUnderlineHint = { style = "underline" },
+						DiagnosticUnderlineInfo = { style = "underline" },
+						DiagnosticUnderlineWarn = { style = "underline" },
+					},
 				})
 				vim.cmd("colorscheme rose-pine")
 			end,
 		})
 
+		-- Colorscheme
+		-- use({
+		-- 	"catppuccin/nvim",
+		-- 	as = "catppuccin",
+		-- 	config = function()
+		-- 		require("catppuccin").setup({
+		-- 			styles = {
+		-- 				comments = "NONE",
+		-- 				conditionals = "NONE",
+		-- 			},
+		-- 			integrations = {
+		-- 				native_lsp = {
+		-- 					virtual_text = {
+		-- 						errors = "NONE",
+		-- 						hints = "NONE",
+		-- 						warnings = "NONE",
+		-- 						information = "NONE",
+		-- 					},
+		-- 				},
+		-- 				which_key = true,
+		-- 				ts_rainbow = true,
+		-- 			},
+		-- 		})
+		-- 		vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+		-- 		vim.cmd([[colorscheme catppuccin]])
+		-- 	end,
+		-- })
 		-- UI
 		use({
 			"folke/trouble.nvim",
@@ -91,10 +124,16 @@ return require("packer").startup({
 			cmd = "NvimTreeToggle",
 			config = function()
 				require("nvim-tree").setup({
+					respect_buf_cwd = true,
 					update_cwd = true,
 					update_focused_file = {
 						enable = true,
 						update_cwd = true,
+					},
+					renderer = {
+						icons = {
+							git_placement = "after",
+						},
 					},
 				})
 			end,
