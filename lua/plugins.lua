@@ -20,7 +20,7 @@ return require("packer").startup({
 		use({
 			"nvim-treesitter/nvim-treesitter",
 			config = function()
-				require("configs.treesitter").setup()
+				require("treesitter").setup()
 			end,
 		})
 		use("p00f/nvim-ts-rainbow")
@@ -189,8 +189,6 @@ return require("packer").startup({
 		use("ahmedkhalf/project.nvim")
 		use({
 			"abecodes/tabout.nvim",
-			event = "InsertEnter",
-			after = "nvim-treesitter",
 			config = function()
 				require("tabout").setup()
 			end,

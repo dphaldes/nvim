@@ -36,6 +36,7 @@ opt.cursorline = true -- highlight current cursor position
 opt.signcolumn = "yes"
 vim.api.nvim_set_option("pumheight", 10)
 vim.api.nvim_set_option("gfn", "JetbrainsMono NF:h11")
+vim.api.nvim_set_option("shell", "nu.exe")
 
 -- remove whitespace on save
 cmd([[au BufWritePre * :%s/\s\+$//e]])

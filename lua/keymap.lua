@@ -55,6 +55,8 @@ local mappings = {
 		g = { "<cmd>Telescope live_grep<CR>", "live grep" },
 		c = { "<cmd>Telescope commands<CR>", "commands" },
 		b = { "<cmd>Telescope buffers<CR> ", "buffers" },
+		t = { "<cmd>Telescope<CR>", "telescope" },
+		h = { "<cmd>Telescope help_tags<CR>", "help tags" },
 	},
 	f = {
 		name = "file",
@@ -72,6 +74,10 @@ local mappings = {
 		p = { "<cmd>BufferPrevious<CR>", "previous" },
 		k = { "<cmd>q<CR>", "close" },
 		b = { "<cmd>Telescope buffers<CR> ", "buffers" },
+	},
+	o = {
+		name = "open",
+		t = { "<cmd>TroubleToggle<cr>", "trouble" },
 	},
 	-- Trouble
 }
