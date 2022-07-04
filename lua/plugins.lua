@@ -1,3 +1,8 @@
+-- VimBeGood
+-- Hydra
+-- git
+-- leap
+
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -68,33 +73,6 @@ return require("packer").startup({
 			end,
 		})
 
-		-- Colorscheme
-		-- use({
-		-- 	"catppuccin/nvim",
-		-- 	as = "catppuccin",
-		-- 	config = function()
-		-- 		require("catppuccin").setup({
-		-- 			styles = {
-		-- 				comments = "NONE",
-		-- 				conditionals = "NONE",
-		-- 			},
-		-- 			integrations = {
-		-- 				native_lsp = {
-		-- 					virtual_text = {
-		-- 						errors = "NONE",
-		-- 						hints = "NONE",
-		-- 						warnings = "NONE",
-		-- 						information = "NONE",
-		-- 					},
-		-- 				},
-		-- 				which_key = true,
-		-- 				ts_rainbow = true,
-		-- 			},
-		-- 		})
-		-- 		vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-		-- 		vim.cmd([[colorscheme catppuccin]])
-		-- 	end,
-		-- })
 		-- UI
 		use({
 			"folke/trouble.nvim",
@@ -124,16 +102,8 @@ return require("packer").startup({
 			cmd = "NvimTreeToggle",
 			config = function()
 				require("nvim-tree").setup({
-					respect_buf_cwd = true,
-					update_cwd = true,
 					update_focused_file = {
 						enable = true,
-						update_cwd = true,
-					},
-					renderer = {
-						icons = {
-							git_placement = "after",
-						},
 					},
 				})
 			end,
@@ -168,6 +138,7 @@ return require("packer").startup({
 		use({ "stevearc/dressing.nvim" })
 		use({ "rcarriga/nvim-notify" })
 		use("folke/which-key.nvim")
+		use({ "simrat39/symbols-outline.nvim" })
 		-- use("mrjones2014/legendary.nvim")
 
 		-- Editing support
@@ -186,12 +157,16 @@ return require("packer").startup({
 				require("Comment").setup()
 			end,
 		})
-		use("ahmedkhalf/project.nvim")
+		-- use("ahmedkhalf/project.nvim")
 		use({
 			"abecodes/tabout.nvim",
 			config = function()
 				require("tabout").setup()
 			end,
+		})
+		use("SmiteshP/nvim-navic")
+		use({
+			"akinsho/flutter-tools.nvim",
 		})
 		if packer_bootstrap then
 			require("packer").sync()

@@ -31,10 +31,13 @@ keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 -- keymap("v", "p", '"_dP', opts)
 
 -- Telescope
-keymap("n", "<leader>ca", "<cmd>Telescope lsp_code_actions<CR>", opts)
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
 -- NerdTree
 keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", opts)
+
+--Terminal Mode
+keymap("t", "<Esc>", "<C-\\><C-n>", opts)
 
 local options = {
 	prefix = "<leader>",

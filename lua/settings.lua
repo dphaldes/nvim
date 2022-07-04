@@ -16,7 +16,7 @@ local opt = vim.opt -- global/buffer/windows-scoped options
 -----------------------------------------------------------
 g.mapleader = " " -- change leader to a space
 opt.mouse = "a" -- enable mouse support
-opt.clipboard = "unnamedplus" -- copy/paste to system clipboard
+-- opt.clipboard = "unnamedplus" -- copy/paste to system clipboard
 opt.swapfile = false -- don't use swapfile
 
 -----------------------------------------------------------
@@ -37,19 +37,20 @@ opt.signcolumn = "yes"
 vim.api.nvim_set_option("pumheight", 10)
 vim.api.nvim_set_option("gfn", "JetbrainsMono NF:h11")
 vim.api.nvim_set_option("shell", "nu.exe")
+vim.api.nvim_set_option("showmode", false)
 
 -- remove whitespace on save
 cmd([[au BufWritePre * :%s/\s\+$//e]])
 
 -- highlight on yank
 exec(
-	[[
+    [[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}
   augroup end
-]],
-	false
+]]   ,
+    false
 )
 
 -----------------------------------------------------------

@@ -128,6 +128,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\darsh\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\filetype.nvim",
     url = "https://github.com/nathom/filetype.nvim"
   },
+  ["flutter-tools.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\darsh\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\flutter-tools.nvim",
+    url = "https://github.com/akinsho/flutter-tools.nvim"
+  },
   ["gitsigns.nvim"] = {
     config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0" },
     loaded = false,
@@ -193,6 +198,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\darsh\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-navic"] = {
+    loaded = true,
+    path = "C:\\Users\\darsh\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-navic",
+    url = "https://github.com/SmiteshP/nvim-navic"
+  },
   ["nvim-notify"] = {
     loaded = true,
     path = "C:\\Users\\darsh\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-notify",
@@ -200,7 +210,7 @@ _G.packer_plugins = {
   },
   ["nvim-tree.lua"] = {
     commands = { "NvimTreeToggle" },
-    config = { "\27LJ\2\nÇ\1\0\0\5\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\3=\3\t\2B\0\2\1K\0\1\0\rrenderer\nicons\1\0\0\1\0\1\18git_placement\nafter\24update_focused_file\1\0\2\venable\2\15update_cwd\2\1\0\2\15update_cwd\2\20respect_buf_cwd\2\nsetup\14nvim-tree\frequire\0" },
+    config = { "\27LJ\2\ne\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\24update_focused_file\1\0\0\1\0\1\venable\2\nsetup\14nvim-tree\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -233,15 +243,15 @@ _G.packer_plugins = {
     path = "C:\\Users\\darsh\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["project.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\darsh\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\project.nvim",
-    url = "https://github.com/ahmedkhalf/project.nvim"
-  },
   ["rose-pine"] = {
     after = { "lualine.nvim" },
     loaded = true,
     only_config = true
+  },
+  ["symbols-outline.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\darsh\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\symbols-outline.nvim",
+    url = "https://github.com/simrat39/symbols-outline.nvim"
   },
   ["tabout.nvim"] = {
     config = { "\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vtabout\frequire\0" },
@@ -283,10 +293,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for hlargs.nvim]], true)
 try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vhlargs\frequire\0", "config", "hlargs.nvim")
 time([[Config for hlargs.nvim]], false)
--- Config for: rose-pine
-time([[Config for rose-pine]], true)
-try_loadstring("\27LJ\2\næ\2\0\0\5\0\17\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0035\4\a\0=\4\b\0035\4\t\0=\4\n\0035\4\v\0=\4\f\3=\3\r\2B\0\2\0016\0\14\0009\0\15\0'\2\16\0B\0\2\1K\0\1\0\26colorscheme rose-pine\bcmd\bvim\21highlight_groups\28DiagnosticUnderlineWarn\1\0\1\nstyle\14underline\28DiagnosticUnderlineInfo\1\0\1\nstyle\14underline\28DiagnosticUnderlineHint\1\0\1\nstyle\14underline\29DiagnosticUnderlineError\1\0\0\1\0\1\nstyle\14underline\1\0\1\20disable_italics\2\nsetup\14rose-pine\frequire\0", "config", "rose-pine")
-time([[Config for rose-pine]], false)
+-- Config for: tabout.nvim
+time([[Config for tabout.nvim]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vtabout\frequire\0", "config", "tabout.nvim")
+time([[Config for tabout.nvim]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15treesitter\frequire\0", "config", "nvim-treesitter")
@@ -295,10 +305,10 @@ time([[Config for nvim-treesitter]], false)
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
--- Config for: tabout.nvim
-time([[Config for tabout.nvim]], true)
-try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vtabout\frequire\0", "config", "tabout.nvim")
-time([[Config for tabout.nvim]], false)
+-- Config for: rose-pine
+time([[Config for rose-pine]], true)
+try_loadstring("\27LJ\2\næ\2\0\0\5\0\17\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0035\4\a\0=\4\b\0035\4\t\0=\4\n\0035\4\v\0=\4\f\3=\3\r\2B\0\2\0016\0\14\0009\0\15\0'\2\16\0B\0\2\1K\0\1\0\26colorscheme rose-pine\bcmd\bvim\21highlight_groups\28DiagnosticUnderlineWarn\1\0\1\nstyle\14underline\28DiagnosticUnderlineInfo\1\0\1\nstyle\14underline\28DiagnosticUnderlineHint\1\0\1\nstyle\14underline\29DiagnosticUnderlineError\1\0\0\1\0\1\nstyle\14underline\1\0\1\20disable_italics\2\nsetup\14rose-pine\frequire\0", "config", "rose-pine")
+time([[Config for rose-pine]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd lualine.nvim ]]
@@ -311,8 +321,8 @@ time([[Sequenced loading]], false)
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file TroubleToggle lua require("packer.load")({'trouble.nvim'}, { cmd = "TroubleToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Telescope lua require("packer.load")({'telescope.nvim'}, { cmd = "Telescope", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Telescope lua require("packer.load")({'telescope.nvim'}, { cmd = "Telescope", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Trouble lua require("packer.load")({'trouble.nvim'}, { cmd = "Trouble", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
@@ -320,7 +330,7 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'nvim-colorizer.lua', 'gitsigns.nvim', 'fidget.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'gitsigns.nvim', 'nvim-colorizer.lua', 'fidget.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

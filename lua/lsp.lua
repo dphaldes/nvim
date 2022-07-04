@@ -86,7 +86,7 @@ cmp.setup.cmdline("/", {
 cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = "path" },
+		-- { name = "path" },
 	}, {
 		{ name = "cmdline" },
 	}),
@@ -133,13 +133,14 @@ local servers = {
 	"sumneko_lua",
 	"gdscript",
 	"clangd",
-	"kotlin_language_server",
+	-- "kotlin_language_server",
 }
 for _, lsp in pairs(servers) do
 	local opts = {
 		capabilities = capabilities,
-		on_attach = function(_, bufnr)
+		on_attach = function(client, bufnr)
 			lsp_keymaps(bufnr)
+			require("nvim-navic").attach(client, bufnr)
 		end,
 	}
 	if server_opts[lsp] then
@@ -148,18 +149,27 @@ for _, lsp in pairs(servers) do
 	lspconfig[lsp].setup(opts)
 end
 
+-- Flutter setup
+require("flutter-tools").setup({
+	lsp = {
+		on_attach = function(_, bufnr)
+			lsp_keymaps(bufnr)
+		end,
+	},
+})
+
 -- Formatter
 local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.autopep8,
+		-- null_ls.builtins.formatting.autopep8,
 		-- builtins.formatting.rustfmt
-		-- null_ls.builtins.formatting.dart_format,
+		null_ls.builtins.formatting.dart_format,
 	},
 	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
-			vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+		if client.server_capabilities.documentFormattingProvider then
+			vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format()")
 		end
 	end,
 })
