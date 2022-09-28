@@ -35,13 +35,17 @@ return require("packer").startup({
 				require("hlargs").setup()
 			end,
 		})
+		use({
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+		})
 		use("neovim/nvim-lspconfig")
 		use("jose-elias-alvarez/null-ls.nvim")
 		use("lewis6991/impatient.nvim")
 		use("nathom/filetype.nvim")
+		-- use({ "mfussenegger/nvim-jdtls", ft = { "java" } }) -- Java
 
 		-- Completion
-		use("williamboman/nvim-lsp-installer")
 		use("hrsh7th/cmp-nvim-lsp")
 		use("hrsh7th/cmp-nvim-lua")
 		use("hrsh7th/cmp-buffer")
@@ -54,25 +58,31 @@ return require("packer").startup({
 		use("onsails/lspkind-nvim")
 
 		-- Colorscheme
+		-- use({
+		-- 	"rose-pine/neovim",
+		-- 	as = "rose-pine",
+		-- 	tag = "v1.*",
+		-- 	config = function()
+		-- 		require("rose-pine").setup({
+		-- 			-- dark_variant = "moon",
+		-- 			disable_italics = true,
+		-- 			highlight_groups = {
+		-- 				DiagnosticUnderlineError = { style = "underline" },
+		-- 				DiagnosticUnderlineHint = { style = "underline" },
+		-- 				DiagnosticUnderlineInfo = { style = "underline" },
+		-- 				DiagnosticUnderlineWarn = { style = "underline" },
+		-- 			},
+		-- 		})
+		-- 		vim.cmd("colorscheme rose-pine")
+		-- 	end,
+		-- })
+
 		use({
-			"rose-pine/neovim",
-			as = "rose-pine",
-			tag = "v1.*",
+			"EdenEast/nightfox.nvim",
 			config = function()
-				require("rose-pine").setup({
-					-- dark_variant = "moon",
-					disable_italics = true,
-					highlight_groups = {
-						DiagnosticUnderlineError = { style = "underline" },
-						DiagnosticUnderlineHint = { style = "underline" },
-						DiagnosticUnderlineInfo = { style = "underline" },
-						DiagnosticUnderlineWarn = { style = "underline" },
-					},
-				})
-				vim.cmd("colorscheme rose-pine")
+				vim.cmd("colorscheme duskfox")
 			end,
 		})
-
 		-- UI
 		use({
 			"folke/trouble.nvim",
@@ -84,17 +94,18 @@ return require("packer").startup({
 		use({
 			"nvim-lualine/lualine.nvim",
 			enter = "VimEnter",
-			after = "rose-pine",
+			-- after = "rose-pine",
 			config = function()
 				require("lualine").setup({
 					options = {
-						theme = "rose-pine",
+						-- theme = "rose-pine",
+						theme = "duskfox",
 						section_separators = { "", "" },
 						component_separators = { "", "" },
+						global_statusline = true,
 					},
 					extensions = { "nvim-tree" },
 				})
-				vim.api.nvim_set_option("laststatus", 3)
 			end,
 		})
 		use({
@@ -104,6 +115,7 @@ return require("packer").startup({
 				require("nvim-tree").setup({
 					update_focused_file = {
 						enable = true,
+						update_root = true,
 					},
 				})
 			end,
@@ -120,14 +132,14 @@ return require("packer").startup({
 				})
 			end,
 		})
-		-- use({
-		-- 	"goolord/alpha-nvim",
-		-- 	requires = { "kyazdani42/nvim-web-devicons" },
-		-- 	config = function()
-		-- 		-- require("alpha").setup(require("alpha.themes.theta").config)
-		-- 		require("startup")
-		-- 	end,
-		-- })
+		use({
+			"goolord/alpha-nvim",
+			requires = { "kyazdani42/nvim-web-devicons" },
+			config = function()
+				-- require("alpha").setup(require("alpha.themes.theta").config)
+				require("startup")
+			end,
+		})
 		use({
 			"lewis6991/gitsigns.nvim", -- Add keybinds later
 			event = "BufRead",
@@ -157,7 +169,7 @@ return require("packer").startup({
 				require("Comment").setup()
 			end,
 		})
-		-- use("ahmedkhalf/project.nvim")
+		use("ahmedkhalf/project.nvim")
 		use({
 			"abecodes/tabout.nvim",
 			config = function()
