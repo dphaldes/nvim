@@ -141,7 +141,6 @@ for _, lsp in pairs(servers) do
 		capabilities = capabilities,
 		on_attach = function(client, bufnr)
 			lsp_keymaps(bufnr)
-			require("nvim-navic").attach(client, bufnr)
 			if client.name == "sumneko_lua" then
 				client.server_capabilities.documentFormattingProvider = false
 			end
@@ -152,15 +151,6 @@ for _, lsp in pairs(servers) do
 	end
 	lspconfig[lsp].setup(opts)
 end
-
--- Flutter setup
-require("flutter-tools").setup({
-	lsp = {
-		on_attach = function(_, bufnr)
-			lsp_keymaps(bufnr)
-		end,
-	},
-})
 
 -- Formatter
 local null_ls = require("null-ls")

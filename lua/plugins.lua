@@ -57,33 +57,15 @@ return require("packer").startup({
 		use("saadparwaiz1/cmp_luasnip")
 		use("onsails/lspkind-nvim")
 
-		-- Colorscheme
-		-- use({
-		-- 	"rose-pine/neovim",
-		-- 	as = "rose-pine",
-		-- 	tag = "v1.*",
-		-- 	config = function()
-		-- 		require("rose-pine").setup({
-		-- 			-- dark_variant = "moon",
-		-- 			disable_italics = true,
-		-- 			highlight_groups = {
-		-- 				DiagnosticUnderlineError = { style = "underline" },
-		-- 				DiagnosticUnderlineHint = { style = "underline" },
-		-- 				DiagnosticUnderlineInfo = { style = "underline" },
-		-- 				DiagnosticUnderlineWarn = { style = "underline" },
-		-- 			},
-		-- 		})
-		-- 		vim.cmd("colorscheme rose-pine")
-		-- 	end,
-		-- })
-
 		use({
 			"EdenEast/nightfox.nvim",
 			config = function()
 				vim.cmd("colorscheme duskfox")
 			end,
 		})
+
 		-- UI
+		use({ "nvim-telescope/telescope.nvim", cmd = "Telescope" })
 		use({
 			"folke/trouble.nvim",
 			cmd = { "Trouble", "TroubleToggle" },
@@ -96,50 +78,28 @@ return require("packer").startup({
 			enter = "VimEnter",
 			-- after = "rose-pine",
 			config = function()
-				require("lualine").setup({
-					options = {
-						-- theme = "rose-pine",
-						theme = "duskfox",
-						section_separators = { "", "" },
-						component_separators = { "", "" },
-						global_statusline = true,
-					},
-					extensions = { "nvim-tree" },
-				})
-				vim.o.ch = 0
-				vim.o.ls = 3
+				require("lua.plugin.lualine")
 			end,
 		})
 		use({
 			"kyazdani42/nvim-tree.lua",
 			cmd = "NvimTreeToggle",
 			config = function()
-				require("nvim-tree").setup({
-					update_focused_file = {
-						enable = true,
-						update_root = true,
-					},
-				})
+				require("lua.plugin.nvim-tree")
 			end,
 		})
-		use({ "nvim-telescope/telescope.nvim", cmd = "Telescope" })
 		use({
 			"j-hui/fidget.nvim",
 			event = "BufRead",
 			config = function()
-				require("fidget").setup({
-					text = {
-						spinner = "arc",
-					},
-				})
+				require("lua.plugin.fidget")
 			end,
 		})
 		use({
 			"goolord/alpha-nvim",
 			requires = { "kyazdani42/nvim-web-devicons" },
 			config = function()
-				-- require("alpha").setup(require("alpha.themes.theta").config)
-				require("startup")
+				require("lua.plugin.alpha")
 			end,
 		})
 		use({
@@ -156,7 +116,12 @@ return require("packer").startup({
 		-- use("mrjones2014/legendary.nvim")
 
 		-- Editing support
-		use("windwp/nvim-autopairs")
+		use({
+			"windwp/nvim-autopairs",
+			config = function()
+				require("lua.plugin.autopairs")
+			end,
+		})
 		use("tpope/vim-surround")
 		use({
 			"norcalli/nvim-colorizer.lua",
@@ -178,10 +143,6 @@ return require("packer").startup({
 				require("tabout").setup()
 			end,
 		})
-		-- use("SmiteshP/nvim-navic")
-		-- use({
-		-- 	"akinsho/flutter-tools.nvim",
-		-- })
 		use({ "gpanders/editorconfig.nvim" })
 		if packer_bootstrap then
 			require("packer").sync()
