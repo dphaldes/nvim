@@ -20,7 +20,7 @@ return require("packer").startup({
 	function(use)
 		-- Must-installs and dependencies
 		use("nvim-lua/plenary.nvim")
-		use("kyazdani42/nvim-web-devicons")
+		use({ "kyazdani42/nvim-web-devicons" })
 		use({ "wbthomason/packer.nvim" })
 		use({
 			"nvim-treesitter/nvim-treesitter",
@@ -106,6 +106,8 @@ return require("packer").startup({
 					},
 					extensions = { "nvim-tree" },
 				})
+				vim.o.ch = 0
+				vim.o.ls = 3
 			end,
 		})
 		use({
@@ -176,10 +178,11 @@ return require("packer").startup({
 				require("tabout").setup()
 			end,
 		})
-		use("SmiteshP/nvim-navic")
-		use({
-			"akinsho/flutter-tools.nvim",
-		})
+		-- use("SmiteshP/nvim-navic")
+		-- use({
+		-- 	"akinsho/flutter-tools.nvim",
+		-- })
+		use({ "gpanders/editorconfig.nvim" })
 		if packer_bootstrap then
 			require("packer").sync()
 		end
