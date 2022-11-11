@@ -9,19 +9,11 @@ local config = {
 	highlight = {
 		enable = true,
 	},
-	-- rainbow = {
-	-- 	enable = true,
-	-- 	extended_mode = true,
-	-- 	max_file_lines = nil,
-	-- 	colors = {
-	-- 		rp_colors.love,
-	-- 		rp_colors.gold,
-	-- 		rp_colors.rose,
-	-- 		rp_colors.pine,
-	-- 		rp_colors.foam,
-	-- 		rp_colors.iris,
-	-- 	},
-	-- },
+	rainbow = {
+		enable = true,
+		extended_mode = true,
+		max_file_lines = nil,
+	},
 }
 
 local M = {}

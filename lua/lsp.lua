@@ -113,7 +113,7 @@ end
 -----------------------
 --- Setup lspconfig ---
 -----------------------
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 
 --- Custom server options
@@ -135,6 +135,7 @@ local servers = {
 	"gdscript",
 	"clangd",
 	"jdtls",
+	"kotlin_language_server",
 }
 for _, lsp in pairs(servers) do
 	local opts = {

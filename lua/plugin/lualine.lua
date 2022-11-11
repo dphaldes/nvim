@@ -1,12 +1,11 @@
 require("lualine").setup({
 	options = {
-		-- theme = "rose-pine",
-		theme = "duskfox",
+		theme = "catppuccin",
 		section_separators = { "", "" },
 		component_separators = { "", "" },
 		global_statusline = true,
 	},
 	extensions = { "nvim-tree" },
 })
-vim.o.ch = 0
-vim.o.ls = 3
+-- vim.o.ch = 0
+vim.o.laststatus = 3

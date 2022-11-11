@@ -2,26 +2,20 @@
 -- Neovim settings
 -----------------------------------------------------------
 
------------------------------------------------------------
 -- Neovim API aliases
------------------------------------------------------------
 --local map = vim.api.nvim_set_keymap  -- set global keymap
 local cmd = vim.cmd -- execute Vim commands
 local exec = vim.api.nvim_exec -- execute Vimscript
 local fn = vim.fn -- call Vim functions
 local g = vim.g -- global variables
 local opt = vim.opt -- global/buffer/windows-scoped options
------------------------------------------------------------
 -- General
------------------------------------------------------------
 g.mapleader = " " -- change leader to a space
 opt.mouse = "a" -- enable mouse support
 -- opt.clipboard = "unnamedplus" -- copy/paste to system clipboard
 opt.swapfile = false -- don't use swapfile
 
------------------------------------------------------------
 -- Neovim UI
------------------------------------------------------------
 opt.number = true -- show line number
 opt.relativenumber = true -- relativenumber
 opt.showmatch = true -- highlight matching parenthesis
@@ -35,7 +29,7 @@ opt.linebreak = true -- wrap on word boundary
 opt.cursorline = true -- highlight current cursor position
 opt.signcolumn = "yes"
 vim.api.nvim_set_option("pumheight", 10)
-vim.api.nvim_set_option("gfn", "JetbrainsMono NF:h11")
+-- vim.api.nvim_set_option("gfn", "JetbrainsMono NF:h11")
 -- vim.api.nvim_set_option("shell", "nu.exe")
 vim.api.nvim_set_option("showmode", false)
 
@@ -53,29 +47,24 @@ exec(
 	false
 )
 
------------------------------------------------------------
 -- Memory, CPU
------------------------------------------------------------
 opt.hidden = true -- enable background buffers
 opt.history = 100 -- remember n lines in history
 opt.lazyredraw = true -- faster scrolling
 opt.synmaxcol = 240 -- max column for syntax highlight
 
------------------------------------------------------------
--- Colorscheme
------------------------------------------------------------
 opt.termguicolors = true -- enable 24-bit RGB colors
--- vim.g.tokyonight_italic_comments = false
--- vim.g.tokyonight_italic_keywords = false
--- cmd([[colorscheme rose-pine]])
-
------------------------------------------------------------
 -- Tabs, indent
------------------------------------------------------------
 opt.expandtab = true -- use spaces instead of tabs
 opt.shiftwidth = 4 -- shift 4 spaces when tab
 opt.tabstop = 4 -- 1 tab == 4 spaces
 opt.smartindent = true -- autoindent new lines
+
+opt.completeopt = "menu,menuone,noinsert" -- completion options
+--opt.shortmess = 'c' 	-- don't show completion messages
+
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
 -- don't auto commenting new lines
 cmd([[au BufEnter * set fo-=c fo-=r fo-=o]])
@@ -95,29 +84,6 @@ g.indentLine_char = "|" -- set indentLine character
 -- disable IndentLine for markdown files (avoid concealing)
 cmd([[autocmd FileType markdown let g:indentLine_enabled=0]])
 
------------------------------------------------------------
--- Autocompletion
------------------------------------------------------------
-opt.completeopt = "menu,menuone,noinsert" -- completion options
---opt.shortmess = 'c' 	-- don't show completion messages
-
------------------------------------------------------------
--- Terminal
------------------------------------------------------------
--- open a terminal pane on the right using :Term
--- cmd [[command Term :botright vsplit term://$SHELL]]
-
--- Terminal visual tweaks
---- enter insert mode when switching to terminal
---- close terminal buffer on process exit
--- cmd [[
---     autocmd TermOpen * setlocal listchars= nonumber norelativenumber nocursorline
---     autocmd TermOpen * startinsert
---     autocmd BufLeave term://* stopinsert
--- ]]
-
 g.indentLine_char = "│"
 
-local group = vim.api.nvim_create_augroup("AlphaClean", { clear = true })
-vim.api.nvim_create_autocmd("FileType Alpha", { command = "hi NonText guifg=bg", group = group })
 vim.notify = require("notify")

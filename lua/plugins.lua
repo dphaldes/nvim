@@ -58,9 +58,26 @@ return require("packer").startup({
 		use("onsails/lspkind-nvim")
 
 		use({
-			"EdenEast/nightfox.nvim",
+			"catppuccin/nvim",
+			as = "catppuccin",
 			config = function()
-				vim.cmd("colorscheme duskfox")
+				require("catppuccin").setup({
+					flavour = "mocha", -- mocha, macchiato, frappe, latte
+					integrations = {
+						ts_rainbow = true,
+					},
+				})
+				vim.api.nvim_command("colorscheme catppuccin")
+			end,
+		})
+
+		-- Misc
+		use({
+			"nvim-neorg/neorg",
+			after = "nvim-treesitter",
+			run = ":Neorg sync-parsers",
+			config = function()
+				require("plugin.neorg")
 			end,
 		})
 
@@ -78,28 +95,21 @@ return require("packer").startup({
 			enter = "VimEnter",
 			-- after = "rose-pine",
 			config = function()
-				require("lua.plugin.lualine")
+				require("plugin.lualine")
 			end,
 		})
 		use({
-			"kyazdani42/nvim-tree.lua",
+			"nvim-tree/nvim-tree.lua",
 			cmd = "NvimTreeToggle",
 			config = function()
-				require("lua.plugin.nvim-tree")
+				require("plugin.nvim-tree")
 			end,
 		})
 		use({
 			"j-hui/fidget.nvim",
 			event = "BufRead",
 			config = function()
-				require("lua.plugin.fidget")
-			end,
-		})
-		use({
-			"goolord/alpha-nvim",
-			requires = { "kyazdani42/nvim-web-devicons" },
-			config = function()
-				require("lua.plugin.alpha")
+				require("plugin.fidget")
 			end,
 		})
 		use({
@@ -112,14 +122,13 @@ return require("packer").startup({
 		use({ "stevearc/dressing.nvim" })
 		use({ "rcarriga/nvim-notify" })
 		use("folke/which-key.nvim")
-		use({ "simrat39/symbols-outline.nvim" })
 		-- use("mrjones2014/legendary.nvim")
 
 		-- Editing support
 		use({
 			"windwp/nvim-autopairs",
 			config = function()
-				require("lua.plugin.autopairs")
+				require("plugin.autopairs")
 			end,
 		})
 		use("tpope/vim-surround")
