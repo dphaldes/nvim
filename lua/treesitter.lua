@@ -1,24 +1,21 @@
-local present, ts_config = pcall(require, "nvim-treesitter.configs")
--- local rp_colors = require("rose-pine.palette")
+return {
+  setup = function()
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = {
+        "bash",
+        "json",
+        "lua",
+        "markdown",
+        "python",
+        "yaml",
+        "cpp",
+        "rust"
+      },
 
-if not present then
-	return
-end
-
-local config = {
-	highlight = {
-		enable = true,
-	},
-	rainbow = {
-		enable = true,
-		extended_mode = true,
-		max_file_lines = nil,
-	},
+      highlight = {
+        additional_vim_regex_highlighting = false,
+        enable = true,
+      },
+    })
+  end,
 }
-
-local M = {}
-M.setup = function()
-	ts_config.setup(config)
-end
-
-return M
