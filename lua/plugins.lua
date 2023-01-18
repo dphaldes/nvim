@@ -80,11 +80,6 @@ return {
     end,
   },
   {
-    "romgrk/barbar.nvim",
-    event = buf_read,
-    cmd = { "BufferClose", "BufferPrevious", "BufferNext" },
-  },
-  {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     config = function()

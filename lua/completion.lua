@@ -11,7 +11,9 @@ return {
     cmp.setup({
       formatting = {
         format = lspkind.cmp_format({
-          with_text = true,
+          mode = "symbol_text",
+          maxwidth = 50,
+          ellipsis_char = "...",
         }),
       },
       mapping = mapping.preset.insert({

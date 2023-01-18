@@ -67,6 +67,7 @@ return {
         nls.builtins.formatting.black,
         nls.builtins.formatting.rustfmt,
         nls.builtins.formatting.dart_format,
+        nls.builtins.formatting.clang_format,
       },
       on_attach = function(client)
         if client.server_capabilities.documentFormattingProvider then

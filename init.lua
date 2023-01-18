@@ -1,10 +1,3 @@
--- require("plugins")
--- require("settings")
--- require("lsp")
--- require("diagnostics")
--- require("config")
--- require("keymap")
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local undo_dir = vim.loop.os_homedir() .. "/.vim/undodir"
 
@@ -27,13 +20,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.runtimepath:prepend(lazypath)
-
---vim.filetype.add({
---  extension = {
---    edn = "clojure",
---    tfvars = "hcl",
---  },
---})
 
 require("settings").setup(undo_dir)
 require("lazy").setup("plugins", {

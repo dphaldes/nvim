@@ -5,7 +5,7 @@ return {
       autoindent = true,
       background = "dark",
       backup = false,
-      clipboard = "unnamedplus",
+      -- clipboard = "unnamedplus",
       cmdheight = 1,
       completeopt = "menuone,noselect",
       cursorline = true,
@@ -47,6 +47,7 @@ return {
       writebackup = false,
       splitright = true,
       splitbelow = true,
+      pumheight = 10,
     }
 
     for opt, val in pairs(opts) do

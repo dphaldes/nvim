@@ -44,15 +44,12 @@ return {
       prefix = "<leader>",
     }
     local mappings = {
-      -- p = {
-      -- 	name = "packer",
-      -- 	s = { "<cmd>PackerSync<CR>", "packer sync" },
-      -- 	i = { "<cmd>PackerInstall<CR>", "packer install" },
-      -- 	u = { "<cmd>PackerUpdate<CR>", "packer update" },
-      -- 	x = { "<cmd>PackerClean<CR>", "packer clean" },
-      -- 	c = { "<cmd>PackerCompile<CR>", "packer compile" },
-      -- 	e = { "<cmd>e $MYVIMRC<CR>", "edit config" },
-      -- },
+      c = {
+        name = "config",
+        l = { "<cmd>Lazy<CR>", "Lazy" },
+        m = { "<cmd>Mason<CR>", "Mason" },
+        c = { "<cmd>e $MYVIMRC<CR>", "edit config" },
+      },
       t = {
         name = "telescope",
         f = { "<cmd>Telescope find_files<CR>", "files" },
