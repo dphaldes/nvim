@@ -5,22 +5,20 @@ return {
     vim.o.laststatus = 3
     require("lualine").setup({
       options = {
-        theme = "catppuccin",
+        theme = "rose-pine",
         component_separators = " ",
+        -- component_separators = { left = "", right = "" },
+        -- section_separators = { left = "", right = "" },
         section_separators = { left = left_sep, right = right_sep },
         global_statusline = true,
       },
       sections = {
-        lualine_a = {
-          { "mode", separator = { left = left_sep }, right_padding = 2 },
-        },
-        lualine_b = { "filename", "diagnostics" },
-        lualine_c = {},
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_c = { "filename" },
         lualine_x = {},
-        lualine_y = { "branch", "filetype", "progress" },
-        lualine_z = {
-          { "location", separator = { right = right_sep }, left_padding = 2 },
-        },
+        lualine_y = { "filetype" },
+        lualine_z = { "location" },
       },
       inactive_sections = {
         lualine_a = { "filename" },

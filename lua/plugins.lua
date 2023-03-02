@@ -2,23 +2,33 @@ local buf_read = "BufRead"
 
 return {
   "nvim-tree/nvim-web-devicons",
+  -- {
+  --   "catppuccin/nvim",
+  --   as = "catppuccin",
+  --   config = function()
+  --     require("catppuccin").setup({
+  --       flavour = "mocha", -- mocha, macchiato, frappe, latte
+  --       integrations = {
+  --         ts_rainbow = true,
+  --         nvimtree = true,
+  --         which_key = true,
+  --         telescope = true,
+  --         treesitter = true,
+  --         mason = true,
+  --         cmp = true,
+  --       },
+  --     })
+  --     vim.api.nvim_command("colorscheme catppuccin")
+  --   end,
+  -- },
   {
-    "catppuccin/nvim",
-    as = "catppuccin",
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = false,
+    priority = 1000,
     config = function()
-      require("catppuccin").setup({
-        flavour = "mocha", -- mocha, macchiato, frappe, latte
-        integrations = {
-          ts_rainbow = true,
-          nvimtree = true,
-          which_key = true,
-          telescope = true,
-          treesitter = true,
-          mason = true,
-          cmp = true,
-        },
-      })
-      vim.api.nvim_command("colorscheme catppuccin")
+      require("rose-pine").setup()
+      vim.cmd("colorscheme rose-pine")
     end,
   },
   {
@@ -188,6 +198,28 @@ return {
     event = "VeryLazy",
     config = true,
   },
+  {
+    "abecodes/tabout.nvim",
+    event = "BufRead",
+    setup = true,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufReadPost",
+    opts = {
+      -- char = "▏",
+      char = "│",
+      filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+      show_trailing_blankline_indent = false,
+      show_current_context = false,
+    },
+  },
+  {
+    "folke/todo-comments.nvim",
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    event = "BufReadPost",
+    config = true,
+  },
 }
 
 -- 		-- use({ "mfussenegger/nvim-jdtls", ft = { "java" } }) -- Java
@@ -217,10 +249,3 @@ return {
 -- 				require("colorizer").setup()
 -- 			end,
 -- 		})
--- 		use({
--- 			"abecodes/tabout.nvim",
--- 			config = function()
--- 				require("tabout").setup()
--- 			end,
--- 		})
--- 		use({ "gpanders/editorconfig.nvim" })
