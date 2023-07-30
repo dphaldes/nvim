@@ -30,6 +30,12 @@ return {
           rp_colors.iris,
         },
       },
+      context_commentstring = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+      },
     })
   end,
 }

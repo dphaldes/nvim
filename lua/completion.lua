@@ -46,9 +46,9 @@ return {
       }),
 
       sources = {
-        { name = "buffer" },
         { name = "luasnip" },
         { name = "nvim_lsp" },
+        { name = "buffer" },
         { name = "nvim_lua" },
         { name = "path" },
       },
@@ -59,18 +59,18 @@ return {
       },
     })
 
-    cmp.setup.cmdline("/", {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        { name = "buffer" },
-      },
-    })
-
-    cmp.setup.cmdline(":", {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({}, {
-        { name = "cmdline" },
-      }),
-    })
+    -- cmp.setup.cmdline("/", {
+    --   mapping = cmp.mapping.preset.cmdline(),
+    --   sources = {
+    --     { name = "buffer" },
+    --   },
+    -- })
+    --
+    -- cmp.setup.cmdline(":", {
+    --   mapping = cmp.mapping.preset.cmdline(),
+    --   sources = cmp.config.sources({}, {
+    --     { name = "cmdline" },
+    --   }),
+    -- })
   end,
 }

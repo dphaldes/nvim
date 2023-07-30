@@ -1,41 +1,26 @@
-local buf_read = "BufRead"
-
 return {
   "nvim-tree/nvim-web-devicons",
-  -- {
-  --   "catppuccin/nvim",
-  --   as = "catppuccin",
-  --   config = function()
-  --     require("catppuccin").setup({
-  --       flavour = "mocha", -- mocha, macchiato, frappe, latte
-  --       integrations = {
-  --         ts_rainbow = true,
-  --         nvimtree = true,
-  --         which_key = true,
-  --         telescope = true,
-  --         treesitter = true,
-  --         mason = true,
-  --         cmp = true,
-  --       },
-  --     })
-  --     vim.api.nvim_command("colorscheme catppuccin")
-  --   end,
-  -- },
   {
     "rose-pine/neovim",
     name = "rose-pine",
     lazy = false,
     priority = 1000,
     config = function()
-      require("rose-pine").setup()
+      require("rose-pine").setup({
+        disable_italics = true,
+        dark_variant = "moon",
+      })
       vim.cmd("colorscheme rose-pine")
     end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = true,
     build = ":TSUpdate",
-    cmd = { "TSUpdate", "TSUpdateSync" },
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "p00f/nvim-ts-rainbow",
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
     config = function()
       require("treesitter").setup()
     end,
@@ -97,6 +82,10 @@ return {
     end,
   },
   {
+    "crispgm/nvim-tabline",
+    config = true,
+  },
+  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     config = function()
@@ -115,7 +104,6 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    event = buf_read,
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
     },
@@ -126,7 +114,6 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    event = buf_read,
     dependencies = {
       "hrsh7th/nvim-cmp",
     },
@@ -136,26 +123,11 @@ return {
   },
   {
     "lewis6991/gitsigns.nvim",
-    event = buf_read,
+    event = "BufRead",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
     config = true,
-  },
-  {
-    "p00f/nvim-ts-rainbow",
-    event = buf_read,
-    dependencies = {
-      "neovim/nvim-lspconfig",
-    },
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        rainbow = {
-          enable = true,
-          extended_mode = true,
-        },
-      })
-    end,
   },
   {
     "m-demare/hlargs.nvim",
@@ -163,10 +135,11 @@ return {
   },
   {
     "j-hui/fidget.nvim",
-    event = buf_read,
+    event = "BufRead",
     config = {
       text = {
-        spinner = "arc",
+        spinner = "dots",
+        done = "⠿",
       },
     },
   },
@@ -175,11 +148,14 @@ return {
     config = true,
   },
   {
-    "nvim-tree/nvim-tree.lua",
-    cmd = "NvimTreeToggle",
-    config = function()
-      require("filetree").setup()
-    end,
+    "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    config = true,
+    -- config = function()
+    --   require("filetree").setup()
+    -- end,
   },
   {
     "folke/trouble.nvim",
@@ -203,21 +179,34 @@ return {
     event = "BufRead",
     setup = true,
   },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPost",
-    opts = {
-      -- char = "▏",
-      char = "│",
-      filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
-      show_trailing_blankline_indent = false,
-      show_current_context = false,
-    },
-  },
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   event = "BufReadPost",
+  --   opts = {
+  --     char = "▏",
+  --     -- char = "│",
+  --     filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+  --     show_trailing_blankline_indent = false,
+  --     show_current_context = false,
+  --   },
+  -- },
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
     event = "BufReadPost",
+    config = true,
+  },
+  { "stevearc/dressing.nvim", event = "VeryLazy" },
+  {
+    "rcarriga/nvim-notify",
+    event = "VeryLazy",
+    config = function()
+      vim.notify = require("notify")
+    end,
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+    event = "VeryLazy",
     config = true,
   },
 }
@@ -236,16 +225,7 @@ return {
 -- 		})
 --
 -- 		-- UI
--- 		use({ "stevearc/dressing.nvim" })
--- 		use({ "rcarriga/nvim-notify" })
 -- 		-- use("mrjones2014/legendary.nvim")
 --
 -- 		-- Editing support
 -- 		use("tpope/vim-surround")
--- 		use({
--- 			"norcalli/nvim-colorizer.lua",
--- 			event = "BufRead",
--- 			config = function()
--- 				require("colorizer").setup()
--- 			end,
--- 		})

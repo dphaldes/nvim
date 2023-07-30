@@ -5,7 +5,6 @@ return {
       autoindent = true,
       background = "dark",
       backup = false,
-      -- clipboard = "unnamedplus",
       cmdheight = 1,
       completeopt = "menuone,noselect",
       cursorline = true,
@@ -27,10 +26,10 @@ return {
       mouse = "nvi",
       number = true,
       relativenumber = true,
-      ruler = true,
+      ruler = false,
       scrolloff = 7,
       shiftwidth = 2,
-      shortmess = "I",
+      shortmess = vim.o.shortmess .. "W",
       showmatch = true,
       showmode = false,
       smartindent = true,
@@ -43,7 +42,7 @@ return {
       undofile = true,
       updatetime = 100,
       visualbell = false,
-      wrap = true,
+      wrap = false,
       writebackup = false,
       splitright = true,
       splitbelow = true,
@@ -86,14 +85,17 @@ return {
     vim.api.nvim_create_autocmd("BufEnter", {
       desc = "don't auto commenting new lines",
       pattern = "*",
-      callback = function()
-        vim.cmd([[set fo-=c fo-=r fo-=o ]])
-      end,
+      command = [[set fo-=c fo-=r fo-=o ]],
     })
 
     local leader = " "
 
     vim.g.mapleader = leader
     vim.g.maplocalleader = leader
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+      desc = "set filetype for qml",
+      pattern = "*.qml",
+      command = "set ft=qml",
+    })
   end,
 }

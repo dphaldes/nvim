@@ -31,12 +31,6 @@ return {
     keymap("v", "<A-k>", ":m .-2<CR>==", opts)
     -- keymap("v", "p", '"_dP', opts)
 
-    -- Telescope
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-
-    -- NerdTree
-    keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", opts)
-
     --Terminal Mode
     keymap("t", "<Esc>", "<C-\\><C-n>", opts)
 
@@ -53,24 +47,16 @@ return {
       t = {
         name = "telescope",
         f = { "<cmd>Telescope find_files<CR>", "files" },
-        g = { "<cmd>Telescope live_grep<CR>", "live grep" },
-        c = { "<cmd>Telescope commands<CR>", "commands" },
-        b = { "<cmd>Telescope buffers<CR> ", "buffers" },
         t = { "<cmd>Telescope<CR>", "telescope" },
-        h = { "<cmd>Telescope help_tags<CR>", "help tags" },
       },
       f = {
-        name = "file",
+        name = "find",
+        g = { "<cmd>Telescope live_grep<CR>", "live grep" },
         f = { "<cmd>Telescope find_files<CR>", "find" },
-      },
-      b = {
-        name = "buffer",
-        v = { "<cmd>vs<CR>", "vertical" },
-        s = { "<cmd>sp<CR>", "horizontal" },
-        n = { "<cmd>BufferNext<CR>", "next" },
-        p = { "<cmd>BufferPrevious<CR>", "previous" },
-        k = { "<cmd>q<CR>", "close" },
+        e = { "<cmd>NeoTreeFocusToggle<CR>", "explorer" },
+        c = { "<cmd>Telescope commands<CR>", "commands" },
         b = { "<cmd>Telescope buffers<CR> ", "buffers" },
+        h = { "<cmd>Telescope help_tags<CR>", "help tags" },
       },
       o = {
         name = "open",

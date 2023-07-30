@@ -1,49 +1,58 @@
 local function lsp_keymaps(bufnr)
-  local opts = { noremap = true, silent = true }
-  local keymap = vim.api.nvim_buf_set_keymap
-  keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  local keymap = vim.keymap.set
+  local opts = { noremap = true, silent = true, buffer = bufnr }
+  keymap("n", "gD", vim.lsp.buf.declaration, opts)
+  keymap("n", "gd", vim.lsp.buf.definition, opts)
+  keymap("n", "K", vim.lsp.buf.hover, opts)
+  keymap("n", "gi", vim.lsp.buf.implementation, opts)
   -- keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  -- keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-  keymap(bufnr, "n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
-  keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+  keymap("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  keymap("n", "gr", vim.lsp.buf.references, opts)
+  keymap("n", "<leader>f", vim.diagnostic.open_float, opts)
+  keymap("n", "[d", function()
+    vim.diagnostic.goto_prev({ border = "rounded" })
+  end, opts)
+  keymap("n", "gl", function()
+    vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })
+  end, opts)
+  keymap("n", "]d", function()
+    vim.diagnostic.goto_next({ border = "rounded" })
+  end, opts)
+  keymap("n", "<leader>q", vim.diagnostic.setloclist, opts)
+  keymap("n", "<leader>ca", vim.lsp.buf.code_action, opts)
   vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format({async = true})' ]])
 end
 
 return {
   setup = function()
     local lspconfig = require("lspconfig")
-    local nls = require("null-ls")
+    local null_ls = require("null-ls")
     local lsps = {
-      "pyright",
+      "pylsp",
       "rust_analyzer",
       "tsserver",
-      "sumneko_lua",
+      "lua_ls",
       "gdscript",
-      "clangd",
+      "ccls",
       "jdtls",
       "kotlin_language_server",
-      "qml_lsp",
       "svelte",
     }
     local server_opts = {
-      ["sumneko_lua"] = function(opts)
+      ["lua_ls"] = function(opts)
         opts.settings = {
           Lua = { diagnostics = { globals = { "vim" } } },
         }
       end,
+      -- ["qmlls"] = function(opts)
+      --   opts.filetypes = { "qml", "qmljs" }
+      --   opts.cmd = { "qmlls6" }
+      -- end,
     }
 
     local on_attach = function(client, buffer)
       lsp_keymaps(buffer)
-      if client.name == "sumneko_lua" then
+      if client.name == "lua_ls" then
         client.server_capabilities.documentFormattingProvider = false
       end
     end
@@ -61,13 +70,15 @@ return {
       lspconfig[lsp].setup(opts)
     end
 
-    nls.setup({
+    null_ls.setup({
       sources = {
-        nls.builtins.formatting.stylua,
-        nls.builtins.formatting.black,
-        nls.builtins.formatting.rustfmt,
-        nls.builtins.formatting.dart_format,
-        nls.builtins.formatting.clang_format,
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.rustfmt,
+        null_ls.builtins.formatting.dart_format,
+        null_ls.builtins.formatting.clang_format,
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.qmlformat,
+        null_ls.builtins.diagnostics.qmllint,
       },
       on_attach = function(client)
         if client.server_capabilities.documentFormattingProvider then
