@@ -24,7 +24,16 @@ local function lsp_keymaps(bufnr)
 end
 
 return {
-  setup = function()
+  "neovim/nvim-lspconfig",
+  event = "BufRead",
+  dependencies = {
+    "jose-elias-alvarez/null-ls.nvim",
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+  },
+  config = function()
+    require("mason").setup()
+    require("mason-lspconfig").setup()
     local lspconfig = require("lspconfig")
     local null_ls = require("null-ls")
     local lsps = {

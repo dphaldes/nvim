@@ -34,42 +34,42 @@ return {
     --Terminal Mode
     keymap("t", "<Esc>", "<C-\\><C-n>", opts)
 
-    local options = {
-      prefix = "<leader>",
-    }
-    local mappings = {
-      c = {
-        name = "config",
-        l = { "<cmd>Lazy<CR>", "Lazy" },
-        m = { "<cmd>Mason<CR>", "Mason" },
-        c = { "<cmd>e $MYVIMRC<CR>", "edit config" },
-      },
-      t = {
-        name = "telescope",
-        f = { "<cmd>Telescope find_files<CR>", "files" },
-        t = { "<cmd>Telescope<CR>", "telescope" },
-      },
-      f = {
-        name = "find",
-        g = { "<cmd>Telescope live_grep<CR>", "live grep" },
-        f = { "<cmd>Telescope find_files<CR>", "find" },
-        e = { "<cmd>NeoTreeFocusToggle<CR>", "explorer" },
-        c = { "<cmd>Telescope commands<CR>", "commands" },
-        b = { "<cmd>Telescope buffers<CR> ", "buffers" },
-        h = { "<cmd>Telescope help_tags<CR>", "help tags" },
-      },
-      o = {
-        name = "open",
-        t = { "<cmd>TroubleToggle<cr>", "trouble" },
-      },
-      -- Trouble
-    }
-    local wk = require("which-key")
-    wk.setup({
-      window = {
-        border = "single",
-      },
-    })
-    wk.register(mappings, options)
+    -- local options = {
+    --   prefix = "<leader>",
+    -- }
+    -- local mappings = {
+    --   c = {
+    --     name = "config",
+    --     l = { "<cmd>Lazy<CR>", "Lazy" },
+    --     m = { "<cmd>Mason<CR>", "Mason" },
+    --     c = { "<cmd>e $MYVIMRC<CR>", "edit config" },
+    --   },
+    --   t = {
+    --     name = "telescope",
+    --     f = { "<cmd>Telescope find_files<CR>", "files" },
+    --     t = { "<cmd>Telescope<CR>", "telescope" },
+    --   },
+    --   f = {
+    --     name = "find",
+    --     g = { "<cmd>Telescope live_grep<CR>", "live grep" },
+    --     f = { "<cmd>Telescope find_files<CR>", "find" },
+    --     e = { "<cmd>NeoTreeFocusToggle<CR>", "explorer" },
+    --     c = { "<cmd>Telescope commands<CR>", "commands" },
+    --     b = { "<cmd>Telescope buffers<CR> ", "buffers" },
+    --     h = { "<cmd>Telescope help_tags<CR>", "help tags" },
+    --   },
+    --   o = {
+    --     name = "open",
+    --     t = { "<cmd>TroubleToggle<cr>", "trouble" },
+    --   },
+    --   -- Trouble
+    -- }
+    -- local wk = require("which-key")
+    -- wk.setup({
+    --   window = {
+    --     border = "single",
+    --   },
+    -- })
+    -- wk.register(mappings, options)
   end,
 }

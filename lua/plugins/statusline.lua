@@ -1,5 +1,7 @@
 return {
-  setup = function()
+  "nvim-lualine/lualine.nvim",
+  event = "VeryLazy",
+  config = function()
     local left_sep, right_sep = "", ""
 
     vim.o.laststatus = 3

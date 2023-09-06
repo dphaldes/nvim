@@ -1,6 +1,15 @@
-local rp_colors = require("rose-pine.palette")
 return {
-  setup = function()
+  "nvim-treesitter/nvim-treesitter",
+  lazy = true,
+  build = ":TSUpdate",
+  dependencies = {
+    "neovim/nvim-lspconfig",
+    "p00f/nvim-ts-rainbow",
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    "rose-pine/neovim",
+  },
+  config = function()
+    local rp_colors = require("rose-pine.palette")
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
         "bash",

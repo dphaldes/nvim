@@ -20,8 +20,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.runtimepath:prepend(lazypath)
+vim.loader.enable()
 
 require("settings").setup(undo_dir)
+require("keymap").setup()
 require("lazy").setup("plugins", {
   change_detection = {
     notify = false,
