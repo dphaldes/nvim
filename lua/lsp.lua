@@ -34,7 +34,6 @@ return {
       "lua_ls",
       "gdscript",
       "ccls",
-      "jdtls",
       "kotlin_language_server",
       "svelte",
     }

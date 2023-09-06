@@ -135,7 +135,8 @@ return {
   },
   {
     "j-hui/fidget.nvim",
-    event = "BufRead",
+    tag = "legacy",
+    event = "LspAttach",
     config = {
       text = {
         spinner = "dots",
@@ -209,9 +210,9 @@ return {
     event = "VeryLazy",
     config = true,
   },
+  { "mfussenegger/nvim-jdtls", ft = { "java" } },
 }
 
--- 		-- use({ "mfussenegger/nvim-jdtls", ft = { "java" } }) -- Java
 --
 --
 -- 		-- Misc
