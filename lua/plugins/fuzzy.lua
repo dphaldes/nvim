@@ -2,11 +2,15 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     lazy = true,
-    cmd = { "Telescope" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-lua/popup.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",
+    },
+    keys = {
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find_files" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope live_grep" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
     },
     opts = {
       defaults = {

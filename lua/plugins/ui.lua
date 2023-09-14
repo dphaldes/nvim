@@ -4,16 +4,24 @@ local plenary = "nvim-lua/plenary.nvim"
 return {
   nvim_web_devicons,
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    lazy = false,
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     config = function()
-      require("rose-pine").setup({
-        disable_italics = true,
-        dark_variant = "moon",
+      require("catppuccin").setup({
+        flavour = "mocha",
+        no_italic = true,
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          treesitter = true,
+          treesitter_context = true,
+          ts_rainbow = true,
+          semantic_tokens = true,
+          nvimtree = true,
+        },
       })
-      vim.cmd("colorscheme rose-pine")
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
   {
@@ -24,7 +32,9 @@ return {
       plenary,
       "MunifTanjim/nui.nvim",
     },
-    cmd = "Neotree",
+    keys = {
+      { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "Neotree toggle" },
+    },
     opts = {
       filesystem = {
         use_libuv_file_watcher = true,
@@ -68,6 +78,17 @@ return {
   },
   {
     "numToStr/Comment.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
+  },
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = true,
   },
