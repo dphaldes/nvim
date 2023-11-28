@@ -4,27 +4,6 @@ local plenary = "nvim-lua/plenary.nvim"
 return {
   nvim_web_devicons,
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      require("catppuccin").setup({
-        flavour = "mocha",
-        no_italic = true,
-        integrations = {
-          cmp = true,
-          gitsigns = true,
-          treesitter = true,
-          treesitter_context = true,
-          ts_rainbow = true,
-          semantic_tokens = true,
-          nvimtree = true,
-        },
-      })
-      vim.cmd.colorscheme("catppuccin")
-    end,
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = {
@@ -36,6 +15,7 @@ return {
       { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "Neotree toggle" },
     },
     opts = {
+      open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
       filesystem = {
         use_libuv_file_watcher = true,
         follow_current_file = {
@@ -54,7 +34,16 @@ return {
     dependencies = {
       plenary,
     },
-    config = true,
+    opts = {
+      signs = {
+        add = { text = "▎" },
+        change = { text = "▎" },
+        delete = { text = "" },
+        topdelete = { text = "" },
+        changedelete = { text = "▎" },
+        untracked = { text = "▎" },
+      },
+    },
   },
   {
     "m-demare/hlargs.nvim",
@@ -65,6 +54,9 @@ return {
     tag = "legacy",
     event = "LspAttach",
     config = {
+      window = {
+        blend = 0,
+      },
       text = {
         spinner = "dots",
         done = "⠿",
@@ -77,19 +69,15 @@ return {
     config = true,
   },
   {
-    "numToStr/Comment.nvim",
-    event = "VeryLazy",
-    config = true,
+    "stevearc/aerial.nvim",
+    opts = {},
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
   },
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true,
-  },
-  {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    "stevearc/stickybuf.nvim",
     config = true,
   },
 }

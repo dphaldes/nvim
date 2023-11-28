@@ -4,8 +4,6 @@ return {
   build = ":TSUpdate",
   dependencies = {
     "neovim/nvim-lspconfig",
-    "p00f/nvim-ts-rainbow",
-    "JoosepAlviste/nvim-ts-context-commentstring",
     "m-demare/hlargs.nvim",
   },
   config = function()
@@ -20,20 +18,8 @@ return {
         "cpp",
         "rust",
       },
-
       highlight = {
         additional_vim_regex_highlighting = false,
-        enable = true,
-      },
-      rainbow = {
-        enable = true,
-        extended_mode = true,
-        max_file_lines = nil,
-      },
-      context_commentstring = {
-        enable = true,
-      },
-      indent = {
         enable = true,
       },
     })

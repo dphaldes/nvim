@@ -34,6 +34,7 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "simrat39/rust-tools.nvim",
     },
     config = function()
       require("mason").setup()
@@ -46,7 +47,6 @@ return {
         "kotlin_language_server",
         "lua_ls",
         "pylsp",
-        "rust_analyzer",
         "svelte",
         "tsserver",
       }
@@ -85,6 +85,12 @@ return {
         end
         lspconfig[lsp].setup(opts)
       end
+
+      --- Rust Tools
+      local rt = require("rust-tools")
+      rt.setup({
+        on_attach = on_attach,
+      })
     end,
   },
   {

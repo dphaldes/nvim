@@ -53,8 +53,6 @@ return {
       vim.o[opt] = val
     end
 
-    require("diagnostics").setup()
-
     vim.api.nvim_create_autocmd("TextYankPost", {
       desc = "highlight yanked region temporarily",
       pattern = "*",

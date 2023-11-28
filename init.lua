@@ -22,8 +22,8 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 vim.loader.enable()
 
-require("settings").setup(undo_dir)
-require("keymap").setup()
+require("configs").setup(undo_dir)
+
 require("lazy").setup("plugins", {
   change_detection = {
     notify = false,
