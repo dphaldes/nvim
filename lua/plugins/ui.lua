@@ -80,4 +80,63 @@ return {
     "stevearc/stickybuf.nvim",
     config = true,
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "VeryLazy",
+    opts = {
+      indent = {
+        char = "│",
+        tab_char = "│",
+      },
+      scope = { enabled = false },
+      exclude = {
+        filetypes = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+        },
+      },
+    },
+    main = "ibl",
+  },
+  {
+    "luozhiya/lsp-virtual-improved.nvim",
+    event = { "LspAttach" },
+    config = function()
+      require("lsp-virtual-improved").setup()
+    end,
+  },
+  {
+    "luukvbaal/statuscol.nvim",
+    opts = function()
+      local builtin = require("statuscol.builtin")
+      return {
+        -- configuration goes here, for example:
+        relculright = true,
+        segments = {
+          {
+            sign = { name = { ".*" } },
+            click = "v:lua.ScSa",
+          },
+          {
+            text = { builtin.lnumfunc, " " },
+            condition = { true, builtin.not_empty },
+            click = "v:lua.ScLa",
+          },
+          {
+            sign = { namespace = { "gitsigns" }, colwidth = 1, wrap = true },
+            click = "v:lua.ScSa",
+          },
+        },
+      }
+    end,
+  },
 }
