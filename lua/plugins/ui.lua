@@ -69,14 +69,6 @@ return {
     config = true,
   },
   {
-    "stevearc/aerial.nvim",
-    opts = {},
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-  },
-  {
     "stevearc/stickybuf.nvim",
     config = true,
   },
@@ -119,7 +111,6 @@ return {
     opts = function()
       local builtin = require("statuscol.builtin")
       return {
-        -- configuration goes here, for example:
         relculright = true,
         segments = {
           {
@@ -135,6 +126,18 @@ return {
             sign = { namespace = { "gitsigns" }, colwidth = 1, wrap = true },
             click = "v:lua.ScSa",
           },
+        },
+        ft_ignore = {
+          "help",
+          "vim",
+          "fugitive",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "noice",
+          "lazy",
+          "toggleterm",
         },
       }
     end,
