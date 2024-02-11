@@ -1,4 +1,4 @@
-local function lsp_keymaps(bufnr)
+local function setup_lsp_keymaps(bufnr)
   local keymap = vim.keymap.set
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -29,8 +29,8 @@ end
 
 local M = {}
 
-function M.getLspOnAttach(client, buffer)
-  lsp_keymaps(buffer)
+function M.setup_on_attach(client, buffer)
+  setup_lsp_keymaps(buffer)
   if client.name == "lua_ls" then
     client.server_capabilities.documentFormattingProvider = false
   end

@@ -32,7 +32,7 @@ return {
         formatting = {
           format = require("lspkind").cmp_format({
             mode = "symbol_text",
-            maxwidth = 50,
+            maxwidth = 40,
             ellipsis_char = "...",
           }),
         },
@@ -60,6 +60,11 @@ return {
         }, {
           { name = "buffer" },
         }),
+        window = {
+          documentation = {
+            max_width = 40,
+          },
+        },
         experimental = {
           ghost_text = {
             hl_group = "CmpGhostText",
@@ -69,9 +74,9 @@ return {
       }
     end,
     config = function(_, opts)
-      for _, source in ipairs(opts.sources) do
-        source.group_index = source.group_index or 1
-      end
+      -- for _, source in ipairs(opts.sources) do
+      --   source.group_index = source.group_index or 1
+      -- end
       require("cmp").setup(opts)
     end,
   },

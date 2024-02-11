@@ -26,6 +26,9 @@ return {
           hide_gitignored = false,
         },
       },
+      source_selector = {
+        winbar = true,
+      },
     },
   },
   {

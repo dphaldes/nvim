@@ -3,7 +3,15 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufRead",
     dependencies = {
-      "williamboman/mason.nvim",
+      {
+        "williamboman/mason.nvim",
+        opts = {
+          registries = {
+            "github:nvim-java/mason-registry",
+            "github:mason-org/mason-registry",
+          },
+        },
+      },
       "williamboman/mason-lspconfig.nvim",
     },
     config = function()
@@ -13,10 +21,8 @@ return {
       local lsps = {
         "ccls",
         "gdscript",
-        "kotlin_language_server",
         "lua_ls",
         "pylsp",
-        "svelte",
         "tsserver",
         "qmlls",
       }
@@ -34,12 +40,10 @@ return {
         end,
       }
 
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
       for _, lsp in pairs(lsps) do
         local opts = {
-          capabilities = capabilities,
-          on_attach = require("util.lsp").getLspOnAttach,
+          capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          on_attach = require("util.lsp").setup_on_attach,
         }
         if server_opts[lsp] then
           server_opts[lsp](opts)

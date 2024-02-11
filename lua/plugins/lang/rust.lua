@@ -1,15 +1,13 @@
 return {
   setup = function(mod)
     local plugin = {
-      "simrat39/rust-tools.nvim",
-      ft = "rust",
-      dependencies = {
-        "neovim/nvim-lspconfig",
-      },
-      opts = function()
-        return {
+      "mrcjkb/rustaceanvim",
+      version = "^4", -- Recommended
+      ft = { "rust" },
+      config = function()
+        vim.g.rustaceanvim = {
           server = {
-            on_attach = require("util.lsp").getLspOnAttach,
+            on_attach = require("util.lsp").setup_on_attach,
           },
         }
       end,

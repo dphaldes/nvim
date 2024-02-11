@@ -8,9 +8,10 @@ return {
       "nvim-telescope/telescope-live-grep-args.nvim",
     },
     keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find_files" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope live_grep" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
+      { "<leader>tf", "<cmd>Telescope find_files<cr>", desc = "Telescope find_files" },
+      { "<leader>tg", "<cmd>Telescope live_grep<cr>", desc = "Telescope live_grep" },
+      { "<leader>tb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
+      { "<leader>th", "<cmd>Telescope help_tags<cr>", desc = "Telescope help_tags" },
     },
     opts = {
       defaults = {
