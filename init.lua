@@ -22,9 +22,8 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 vim.loader.enable()
 
-require("configs").setup(undo_dir)
-
-require("lazy").setup("plugins", {
+require("config").setup(undo_dir)
+require("lazy").setup("plugin", {
   change_detection = {
     notify = false,
   },
@@ -49,3 +48,5 @@ require("lazy").setup("plugins", {
     },
   },
 })
+require("autocommand")
+

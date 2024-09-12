@@ -16,12 +16,19 @@ return {
     opts = {
       defaults = {
         layout_config = {
-          prompt_position = "top",
+          -- prompt_position = "top",
         },
+        -- path_display = function(_, path)
+        --   local tail = require("telescope.utils").path_tail(path)
+        --   return string.format("%s %s", tail, path)
+        -- end,
+        -- path_display = { truncate = 3 },
+        path_display = { "smart" },
       },
       pickers = {
         find_files = {
           hidden = true,
+          theme = "ivy",
           file_ignore_patterns = {
             "_build/",
             ".cache/",

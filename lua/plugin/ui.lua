@@ -25,6 +25,7 @@ return {
           hide_dotfiles = false,
           hide_gitignored = false,
         },
+        group_empty_dirs = true,
       },
       source_selector = {
         winbar = true,
@@ -143,6 +144,19 @@ return {
           "toggleterm",
         },
       }
+    end,
+  },
+  {
+    "RRethy/vim-illuminate",
+    event = "VeryLazy",
+    config = function()
+      require("illuminate").configure({
+        delay = 200,
+        large_file_cutoff = 2000,
+        large_file_overrides = {
+          providers = { "lsp" },
+        },
+      })
     end,
   },
 }
