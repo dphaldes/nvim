@@ -58,8 +58,8 @@ return {
             local hl = tab.is_current() and theme.current_tab or theme.tab
             return {
               -- tab.is_current() and "" or "󰆣",
-              string.format(" %d:", tab.number()),
-              string.format("[%s]", tab.current_win().buf_name()),
+              string.format(" %d: ", tab.number()),
+              string.format("%s ", tab.current_win().buf_name()),
               tab.current_win().buf().is_changed() and " [+]" or "",
               hl = hl,
             }
