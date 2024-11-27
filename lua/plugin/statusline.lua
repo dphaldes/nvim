@@ -1,12 +1,12 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    event = "ColorScheme",
     config = function()
       vim.o.laststatus = 3
       require("lualine").setup({
         options = {
-          theme = "auto",
+          theme = "rose-pine",
           component_separators = " ",
           -- component_separators = { left = "", right = "" },
           -- section_separators = { left = "", right = "" },

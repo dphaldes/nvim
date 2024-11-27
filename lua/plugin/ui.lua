@@ -2,7 +2,20 @@ local nvim_web_devicons = "nvim-tree/nvim-web-devicons"
 local plenary = "nvim-lua/plenary.nvim"
 
 return {
-  nvim_web_devicons,
+  {
+    "echasnovski/mini.icons",
+    opts = {},
+    lazy = true,
+    specs = {
+      { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
+    },
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",

@@ -1,21 +1,22 @@
 return {
   setup = function(mod)
     local plugin = {
-      "nvim-java/nvim-java",
+      "mfussenegger/nvim-jdtls",
       dependencies = {
-        "nvim-java/lua-async-await",
-        "nvim-java/nvim-java-core",
-        "nvim-java/nvim-java-test",
-        "nvim-java/nvim-java-dap",
-        "MunifTanjim/nui.nvim",
-        "mfussenegger/nvim-dap",
+        "williamboman/mason.nvim",
       },
       ft = "java",
       config = function()
-        require("java").setup()
-        require("lspconfig").jdtls.setup({
-          capabilities = require("cmp_nvim_lsp").default_capabilities(),
-          on_attach = require("util.lsp").setup_on_attach,
+        local jdtls_bin = vim.fn.stdpath("data") .. "/mason/bin/jdtls"
+        local config = {
+          cmd = { jdtls_bin },
+          root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+        }
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = "java",
+          callback = function()
+            require("jdtls").start_or_attach(config)
+          end,
         })
       end,
     }

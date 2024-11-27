@@ -14,21 +14,17 @@ return {
       { "<leader>th", "<cmd>Telescope help_tags<cr>", desc = "Telescope help_tags" },
     },
     opts = {
-      defaults = {
-        layout_config = {
-          -- prompt_position = "top",
-        },
+      defaults = vim.tbl_extend("force", require("telescope.themes").get_ivy(), {
         -- path_display = function(_, path)
         --   local tail = require("telescope.utils").path_tail(path)
         --   return string.format("%s %s", tail, path)
         -- end,
         -- path_display = { truncate = 3 },
         path_display = { "smart" },
-      },
+      }),
       pickers = {
         find_files = {
           hidden = true,
-          theme = "ivy",
           file_ignore_patterns = {
             "_build/",
             ".cache/",

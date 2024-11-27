@@ -6,10 +6,11 @@ licenses:
   - MIT
 languages:
   - Java
-categories: []
+categories:
+ - BSP
 
 source:
-  id: pkg:github/microsoft/build-server-for-gradle@0.1.2
+  id: pkg:github/microsoft/build-server-for-gradle@0.3.0
   build:
     run: ./gradlew --no-daemon build
 

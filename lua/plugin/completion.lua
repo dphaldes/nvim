@@ -8,7 +8,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lua",
     "hrsh7th/cmp-path",
-    "onsails/lspkind-nvim",
+    "echasnovski/mini.icons",
   },
   opts = function()
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -23,12 +23,20 @@ return {
         end,
       },
       formatting = {
-        format = require("lspkind").cmp_format({
-          mode = "symbol_text",
-          maxwidth = 40,
-          ellipsis_char = "...",
-        }),
+        format = function(_, vim_item)
+          local icon, hl = require("mini.icons").get("lsp", vim_item.kind)
+          vim_item.kind = icon .. " " .. vim_item.kind
+          vim_item.kind_hl_group = hl
+          return vim_item
+        end,
       },
+      -- formatting = {
+      --   format = require("lspkind").cmp_format({
+      --     mode = "symbol_text",
+      --     maxwidth = 40,
+      --     ellipsis_char = "...",
+      --   }),
+      -- },
       mapping = cmp.mapping.preset.insert({
         ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
         ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
