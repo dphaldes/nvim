@@ -3,20 +3,6 @@ local plenary = "nvim-lua/plenary.nvim"
 
 return {
   {
-    "echasnovski/mini.icons",
-    opts = {},
-    lazy = true,
-    specs = {
-      { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
-    },
-    init = function()
-      package.preload["nvim-web-devicons"] = function()
-        require("mini.icons").mock_nvim_web_devicons()
-        return package.loaded["nvim-web-devicons"]
-      end
-    end,
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = {
@@ -51,25 +37,19 @@ return {
   },
   {
     "j-hui/fidget.nvim",
-    tag = "legacy",
     event = "LspAttach",
-    config = {
-      window = {
-        blend = 0,
-      },
-      text = {
-        spinner = "dots",
-        done = "⠿",
+    opts = {
+      progress = {
+        display = {
+          progress_icon = { pattern = "dots" },
+          done_icon = "⠿",
+        },
       },
     },
   },
   {
     "folke/trouble.nvim",
     cmd = { "Trouble", "TroubleToggle" },
-    config = true,
-  },
-  {
-    "stevearc/stickybuf.nvim",
     config = true,
   },
   {
@@ -130,17 +110,16 @@ return {
         ft_ignore = {
           "help",
           "vim",
-          "fugitive",
-          "alpha",
-          "dashboard",
           "neo-tree",
           "Trouble",
-          "noice",
           "lazy",
-          "toggleterm",
         },
       }
     end,
+  },
+  {
+    "stevearc/dressing.nvim",
+    opts = {},
   },
   {
     "RRethy/vim-illuminate",
@@ -154,5 +133,10 @@ return {
         },
       })
     end,
+  },
+  {
+    "chrisgrieser/nvim-lsp-endhints",
+    event = "LspAttach",
+    opts = {},
   },
 }

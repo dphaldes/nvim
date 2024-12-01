@@ -3,33 +3,22 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufRead",
     dependencies = {
-      {
-        "williamboman/mason.nvim",
-        opts = {
-          registries = {
-            "github:nvim-java/mason-registry",
-            "github:mason-org/mason-registry",
-            "file:/home/chonky/.config/nvim/mason",
-          },
-        },
-      },
-      "williamboman/mason-lspconfig.nvim",
+      "williamboman/mason.nvim",
     },
     config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup()
       local lspconfig = require("lspconfig")
       local lsps = {
         "astro",
         "clangd",
         "gdscript",
         "lua_ls",
-        "qmlls",
+        "millet",
         "pylsp",
+        "prolog_ls",
         "rust_analyzer",
         "tinymist",
         "ts_ls",
-        "prolog_ls",
+        "qmlls",
       }
       local server_opts = {
         ["lua_ls"] = function(opts)
@@ -63,5 +52,13 @@ return {
       end
     end,
   },
-  { "folke/neodev.nvim", config = true },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
 }

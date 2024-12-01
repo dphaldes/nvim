@@ -6,22 +6,13 @@ return {
     "neovim/nvim-lspconfig",
     "m-demare/hlargs.nvim",
   },
-  config = function()
-    require("nvim-treesitter.configs").setup({
-      ensure_installed = {
-        "bash",
-        "json",
-        "lua",
-        "markdown",
-        "python",
-        "yaml",
-        "cpp",
-        "rust",
-      },
-      highlight = {
-        additional_vim_regex_highlighting = false,
-        enable = true,
-      },
-    })
+  opts = {
+    highlight = {
+      enable = true,
+    },
+  },
+  config = function(opts)
+    require("nvim-treesitter.configs").setup(opts)
   end,
 }
+
